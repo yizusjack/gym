@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GimnastaController;
+use App\Models\Gimnasta;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,10 +25,17 @@ Route::middleware([
     'verified'
 ])->group(function () {
     Route::get('/dashboard', function () {
-        return view('dashboard');
+        //return view('dashboard');
+        $gimnastas = Gimnasta::all(); //puede ser get()
+        return view('gimnastas.indexGimnasta', compact('gimnastas'));
     })->name('dashboard');
 });
 
 Route::resource('gimnasta', GimnastaController::class)->parameters([
     'gimnasta' => 'gimnasta'
 ]);
+
+View::composer(['*'], function($view){
+    $gimnastas = Gimnasta::all();
+    $view->with('gimnastas', $gimnastas);
+});

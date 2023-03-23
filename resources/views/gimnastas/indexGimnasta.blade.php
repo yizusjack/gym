@@ -1,12 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+<x-gymLayout>
+    <x-slot:title>
+      Gimnastas
+    </x-slot>
     <h1>Gimnastas</h1>
     <a href="/gimnasta/create">Agregar gimnasta</a>
     <ul>
@@ -17,5 +12,11 @@
             </li>
         @endforeach
     </ul>
-</body>
-</html>
+    @php
+        $hoy = getdate();
+        print_r($hoy);
+    @endphp
+
+    
+    <x/slot>
+</x-gymLayout>

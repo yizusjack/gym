@@ -49,7 +49,8 @@ class GimnastaController extends Controller
      */
     public function show(Gimnasta $gimnasta)
     {
-        return view('gimnastas/show-gimnasta', compact('gimnasta'));
+        $gimnastas = Gimnasta::all(); //puede ser get()
+        return view('gimnastas/show-gimnasta', compact('gimnasta'), compact('gimnastas'));
     }
 
     /**
