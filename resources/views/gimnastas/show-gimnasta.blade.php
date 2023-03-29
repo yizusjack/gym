@@ -29,7 +29,7 @@
                     </tr>
                     <tr>
                         <th scope="row">Nacimiento</th>
-                        <td>{{$gimnasta->fecha_n_g}}</td>
+                        <td>{{$fechaN->format('d')}}-{{$fechaN->format('m')}}-{{$fechaN->format('Y')}}</td>
                     </tr>
                     <tr>
                         <th scope="row">Edad</th>

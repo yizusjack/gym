@@ -11,6 +11,7 @@
         $fechaHoy = new DateTime($fecha);
     @endphp
 
+
     <table class="table table-striped">
         <thead>
           <tr>
@@ -31,7 +32,7 @@
                     <td>{{$gim->nombre_g}}</td>
                     <td>{{$gim->apellido_g}}</td>
                     <td>{{$Diferencia -> format('%Y')}} años</td>
-                    <td>{{$gim->fecha_n_g}}</td>
+                    <td>{{$fechaN->format('d')}}-{{$fechaN->format('m')}}-{{$fechaN->format('Y')}}</td>
                     <td class='text-center'>
                         <a href="/gimnasta/{{$gim->id}}">
                              <i class="bi bi-info-circle-fill"></i>

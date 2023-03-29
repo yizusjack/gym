@@ -31,7 +31,7 @@ Route::middleware([
     })->name('dashboard');
 });
 
-Route::resource('gimnasta', GimnastaController::class)->parameters([
+Route::resource('gimnasta', GimnastaController::class)->middleware('auth')->parameters([
     'gimnasta' => 'gimnasta'
 ]);
 
