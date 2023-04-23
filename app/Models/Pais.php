@@ -5,16 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-
-class Gimnasta extends Model
+class Pais extends Model
 {
     use HasFactory;
 
+    protected $table = 'paises';
+
     public $timestamps = false;
 
-    public function paises(){
-        return $this->belongsTo(Pais::class);
+    public function gimnastas(){
+        return $this->hasMany(Gimnasta::class);
     }
-
-    protected $fillable = ['nombre_g', 'apellido_g', 'fecha_n_g', 'paises_id',];
 }

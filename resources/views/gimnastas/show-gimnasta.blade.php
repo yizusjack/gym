@@ -35,6 +35,10 @@
                         <th scope="row">Edad</th>
                         <td>{{$Diferencia -> format('%Y')}} años</td>
                     </tr>
+                    <tr>
+                        <th scope="row">Pais</th>
+                        <td>{{$gimnasta->paises->nombre_p}} <x-dynamic-component component="flag-country-{{$gimnasta->paises->iso2code_p}}" class="d-inline-block w-6 h-6"/></td>
+                    </tr>
                     </tbody>
                 </table>
                 <!-- End Default Table Example -->
@@ -45,7 +49,7 @@
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">Información</h5>
-                    <p>{{$gimnasta->nombre_g}} {{$gimnasta->apellido_g}} es una gimnasta artística nacida el {{$fechaN->format('d')}} de 
+                    <p>{{$gimnasta->nombre_g}} {{$gimnasta->apellido_g}} es una gimnasta artística de {{$gimnasta->paises->nombre_p}} nacida el {{$fechaN->format('d')}} de 
                         @switch($fechaN->format('m'))
                             @case(1)
                                 enero

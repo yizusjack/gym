@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pais;
 use App\Models\Gimnasta;
 use Illuminate\Http\Request;
 
@@ -13,7 +14,8 @@ class GimnastaController extends Controller
     public function index()
     {
         $gimnastas = Gimnasta::all(); //puede ser get()
-        return view('gimnastas.indexGimnasta', compact('gimnastas'));
+        $paises = Pais::all();
+        return view('gimnastas.indexGimnasta', compact('gimnastas', 'paises'));
     }
 
     /**
@@ -21,7 +23,8 @@ class GimnastaController extends Controller
      */
     public function create()
     {
-        return view('gimnastas.createGimnasta');
+        $paises = Pais::orderBy('nombre_p')->get();
+        return view('gimnastas.createGimnasta', compact('paises'));
     }
 
     /**
@@ -34,13 +37,7 @@ class GimnastaController extends Controller
             'apellido_g' => ['required', 'max:255'],
             'fecha_n_g'=> ['required', 'date'],
         ]);
-
-        $gimnasta = new Gimnasta();
-        $gimnasta->nombre_g = $request->nombre_g;
-        $gimnasta->apellido_g = $request->apellido_g;
-        $gimnasta->fecha_n_g = $request->fecha_n_g;
-        $gimnasta->save();
-
+        Gimnasta::create($request->all()); 
         return redirect('gimnasta');
     }
 
@@ -50,7 +47,8 @@ class GimnastaController extends Controller
     public function show(Gimnasta $gimnasta)
     {
         $gimnastas = Gimnasta::all(); //puede ser get()
-        return view('gimnastas/show-gimnasta', compact('gimnasta'), compact('gimnastas'));
+        $paises = Pais::find($gimnasta->id);
+        return view('gimnastas/show-gimnasta', compact('gimnasta', 'paises'));
     }
 
     /**
@@ -58,7 +56,8 @@ class GimnastaController extends Controller
      */
     public function edit(Gimnasta $gimnasta)
     {
-        return view('gimnastas/edit-gimnasta', compact('gimnasta'));
+        $paises=Pais::all();
+        return view('gimnastas/edit-gimnasta', compact('gimnasta', 'paises'));
     }
 
     /**
@@ -72,10 +71,13 @@ class GimnastaController extends Controller
             'fecha_n_g'=> ['required', 'date'],
         ]);
         
-        $gimnasta->nombre_g = $request->nombre_g;
+        /*$gimnasta->nombre_g = $request->nombre_g;
         $gimnasta->apellido_g = $request->apellido_g;
         $gimnasta->fecha_n_g = $request->fecha_n_g;
-        $gimnasta->save();
+        $gimnasta->save();*/
+
+        Gimnasta::where('id', $gimnasta->id)->update($request->except('_token', '_method'));
+
         return redirect()->route('gimnasta.show', $gimnasta);
     }
 

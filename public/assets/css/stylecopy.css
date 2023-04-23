@@ -1237,3 +1237,32 @@ h6 {
   font-size: 13px;
   color: #012970;
 }
+
+
+/*------------------------------------------------------------------
+FLAGS
+-------------------------------------------------------------------*/
+
+i.flag-ad:before, i.flag-andorra:before {
+  background-position: 0 0!important;
+}
+i.flag:before {
+  content: "";
+  background: url(https://mdbootstrap.com/img/svg/flags.png) no-repeat -108px -1976px;
+}
+i.flag:before, i.flag:not(.icon) {
+  display: inline-block;
+  width: 16px;
+  height: 11px;
+}
+*, :after, :before {
+  box-sizing: border-box;
+}
+i.flag:not(.icon) {
+  margin: 0 0.5em 0 0;
+  line-height: 11px;
+  text-decoration: inherit;
+  vertical-align: baseline;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}

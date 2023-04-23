@@ -26,6 +26,16 @@
                 <h5>{{$message}}</h5>
             @enderror
         </div>
+        <div class="col-12">
+          <label for="paises_id" class="form-label">Pais: </label> <br>
+          <select name="paises_id" id="paises_id" value="{{old('paises_id')}}>
+            @foreach($paises as $cont)
+              <option value="{{$cont->id}}" @if (old('paises_id')==$cont->id)
+                  selected
+              @endif>{{$cont->nombre_p}}</option>
+            @endforeach
+          </select>
+        </div>
         <div class="text-center">
           <button type="submit" class="btn btn-primary">Enviar</button>
           <button type="reset" class="btn btn-secondary">Limpiar</button>
