@@ -28,9 +28,9 @@
         </div>
         <div class="col-12">
           <label for="paises_id" class="form-label">Pais: </label> <br>
-          <select name="paises_id" id="paises_id" value="{{old('paises_id')}}>
+          <select name="paises_id" id="paises_id">
             @foreach($paises as $cont)
-              <option value="{{$cont->id}}" @if (old('paises_id')==$cont->id)
+              <option value="{{$cont->id}}" @if (old('paises_id')==$cont->id) 
                   selected
               @endif>{{$cont->nombre_p}}</option>
             @endforeach

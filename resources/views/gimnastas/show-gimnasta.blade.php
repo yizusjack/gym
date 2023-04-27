@@ -15,7 +15,14 @@
             <div class="card">
                 <div class="card-body">
                 <h5 class="card-title">Detalles</h5>
-
+                @php
+                $route="";
+                if(sizeof($imagen)!=0){
+                    $im = $imagen[0];
+                    $route = $im->hash;
+                }
+            @endphp
+            <img src="{{Storage::url($route)}}" alt="">
                 <!-- Default Table -->
                 <table class="table">
                     <tbody>
@@ -100,8 +107,26 @@
                             <button type="submit" class="btn btn-danger">Eliminar</button>
                         </div>
                     </form>
+                    @if ($gimnasta->paises->nombre_p=="Italia")
+                        <br>
+                        <div class="text-center">
+                            <span class="bg-success">#it</span><span class="text-dark">alg</span><span class="bg-danger">ym</span> 
+                        </div>
+                    @endif
                 </div>
             </div>
+            <form action="{{route('picture.store')}}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <div class="mb-3">
+                    <label for="picture" class="form-label">Agregar imágenes</label>
+                    <input class="form-control" type="file" id="picture" name="picture">
+                  </div>
+              
+                <input type="hidden" name="gimnastas_id" id="gimnastas_id" value="{{$gimnasta->id}}">
+                <div class="col-md-4">
+                    <button type="submit" class="btn btn-outline-secondary">Subir</button>
+                </div>
+            </form>
         </div>
     </div>
 </x-gymLayout>

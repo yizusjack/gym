@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Picture;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 
 class Gimnasta extends Model
@@ -14,6 +15,10 @@ class Gimnasta extends Model
 
     public function paises(){
         return $this->belongsTo(Pais::class);
+    }
+
+    public function pictures(){
+        return $this->hasMany(Picture::class);
     }
 
     protected $fillable = ['nombre_g', 'apellido_g', 'fecha_n_g', 'paises_id',];

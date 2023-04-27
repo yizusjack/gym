@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pais;
+use App\Models\Picture;
 use App\Models\Gimnasta;
 use Illuminate\Http\Request;
 
@@ -47,8 +48,10 @@ class GimnastaController extends Controller
     public function show(Gimnasta $gimnasta)
     {
         $gimnastas = Gimnasta::all(); //puede ser get()
-        $paises = Pais::find($gimnasta->id);
-        return view('gimnastas/show-gimnasta', compact('gimnasta', 'paises'));
+        $imagen = Picture::where('gimnastas_id', '=', $gimnasta->id)->get(); //Searches up for the pictures of the gymnast
+        $paises= Pais::find($gimnasta->id);
+        
+        return view('gimnastas/show-gimnasta', compact('gimnasta', 'paises', 'imagen'));
     }
 
     /**
@@ -56,7 +59,7 @@ class GimnastaController extends Controller
      */
     public function edit(Gimnasta $gimnasta)
     {
-        $paises=Pais::all();
+        $paises = Pais::orderBy('nombre_p')->get();
         return view('gimnastas/edit-gimnasta', compact('gimnasta', 'paises'));
     }
 
@@ -76,7 +79,7 @@ class GimnastaController extends Controller
         $gimnasta->fecha_n_g = $request->fecha_n_g;
         $gimnasta->save();*/
 
-        Gimnasta::where('id', $gimnasta->id)->update($request->except('_token', '_method'));
+        Gimnasta::where('id', $gimnasta->id)->update($request->except('_token', '_method')); /*Searchs up for the gymnast and updates it with the request exceptuating the token and method*/
 
         return redirect()->route('gimnasta.show', $gimnasta);
     }
