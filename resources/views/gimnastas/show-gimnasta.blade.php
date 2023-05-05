@@ -23,6 +23,7 @@
                 }
             @endphp
             <img src="{{Storage::url($route)}}" alt="">
+            <a href="{{route('gimnasta.galeria', $gimnasta->id)}}"><i class="bi bi-card-image"></i></a>
                 <!-- Default Table -->
                 <table class="table">
                     <tbody>
@@ -115,18 +116,22 @@
                     @endif
                 </div>
             </div>
-            <form action="{{route('picture.store')}}" method="POST" enctype="multipart/form-data">
-                @csrf
-                <div class="mb-3">
-                    <label for="picture" class="form-label">Agregar imágenes</label>
-                    <input class="form-control" type="file" id="picture" name="picture">
-                  </div>
-              
-                <input type="hidden" name="gimnastas_id" id="gimnastas_id" value="{{$gimnasta->id}}">
-                <div class="col-md-4">
-                    <button type="submit" class="btn btn-outline-secondary">Subir</button>
+            <div class="card">
+                <div class="card-body">
+                    <form action="{{route('picture.store')}}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        <div class="mb-3">
+                            <label for="picture" class="form-label">Agregar imágenes</label>
+                            <input class="form-control" type="file" id="picture" name="picture">
+                          </div>
+                      
+                        <input type="hidden" name="gimnastas_id" id="gimnastas_id" value="{{$gimnasta->id}}">
+                        <div class="col-md-4">
+                            <button type="submit" class="btn btn-outline-secondary">Subir</button>
+                        </div>
+                    </form>
                 </div>
-            </form>
+            </div>
         </div>
     </div>
 </x-gymLayout>

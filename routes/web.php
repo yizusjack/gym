@@ -43,6 +43,10 @@ Route::resource('competencia', CompetenciaController::class)->middleware('auth')
     'competencia' => 'competencia'
 ]);
 
+Route::get('gimnasta/galeria/{gimnasta}',
+    [GimnastaController::class, 'galeria'])
+    ->name('gimnasta.galeria');
+
 Route::resource('picture', PictureController::class);
 
 View::composer(['*'], function($view){

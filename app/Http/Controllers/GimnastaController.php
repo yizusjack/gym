@@ -14,9 +14,8 @@ class GimnastaController extends Controller
      */
     public function index()
     {
-        $gimnastas = Gimnasta::all(); //puede ser get()
-        $paises = Pais::all();
-        return view('gimnastas.indexGimnasta', compact('gimnastas', 'paises'));
+        $gimnastas = Gimnasta::with('paises')->get(); //Using 'with' we are implementing eager loading
+        return view('gimnastas.indexGimnasta', compact('gimnastas'));
     }
 
     /**
@@ -47,11 +46,10 @@ class GimnastaController extends Controller
      */
     public function show(Gimnasta $gimnasta)
     {
-        $gimnastas = Gimnasta::all(); //puede ser get()
         $imagen = Picture::where('gimnastas_id', '=', $gimnasta->id)->get(); //Searches up for the pictures of the gymnast
         $paises= Pais::find($gimnasta->id);
         
-        return view('gimnastas/show-gimnasta', compact('gimnasta', 'paises', 'imagen'));
+        return view('gimnastas.show-gimnasta', compact('gimnasta', 'paises', 'imagen'));
     }
 
     /**
@@ -60,7 +58,7 @@ class GimnastaController extends Controller
     public function edit(Gimnasta $gimnasta)
     {
         $paises = Pais::orderBy('nombre_p')->get();
-        return view('gimnastas/edit-gimnasta', compact('gimnasta', 'paises'));
+        return view('gimnastas.edit-gimnasta', compact('gimnasta', 'paises'));
     }
 
     /**
@@ -91,5 +89,14 @@ class GimnastaController extends Controller
     {
         $gimnasta->delete();
         return redirect()->route('gimnasta.index');
+    }
+
+    /**
+     * Show the gallery with all pictures from a gymnast
+     */
+    public function galeria(Gimnasta $gimnasta)
+    {
+        $pics = Picture::where('gimnastas_id', '=', $gimnasta->id)->get();
+        return view('gimnastas.galeriaGimnasta', compact('gimnasta', 'pics'));
     }
 }

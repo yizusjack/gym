@@ -29,7 +29,12 @@ class CompetenciaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nombre_c' => ['required', 'max:255'],
+            'tipo_c' => ['required', 'min:1', 'max:3'],
+        ]);
+        Competencia::create($request->all()); 
+        return redirect('competencia');
     }
 
     /**
@@ -37,7 +42,7 @@ class CompetenciaController extends Controller
      */
     public function show(Competencia $competencia)
     {
-        //
+        return view('competencias.showCompetencia', compact('competencia'));
     }
 
     /**
@@ -45,7 +50,7 @@ class CompetenciaController extends Controller
      */
     public function edit(Competencia $competencia)
     {
-        //
+        return view('competencias/editCompetencia', compact('competencia'));
     }
 
     /**
@@ -53,7 +58,14 @@ class CompetenciaController extends Controller
      */
     public function update(Request $request, Competencia $competencia)
     {
-        //
+        $request->validate([
+            'nombre_c' => ['required', 'max:255'],
+            'tipo_c' => ['required', 'min:1', 'max:3'],
+        ]);
+
+        Competencia::where('id', $competencia->id)->update($request->except('_token', '_method')); /*Searchs up for the gymnast and updates it with the request exceptuating the token and method*/
+
+        return redirect()->route('competencia.index');
     }
 
     /**
@@ -61,6 +73,7 @@ class CompetenciaController extends Controller
      */
     public function destroy(Competencia $competencia)
     {
-        //
+        $competencia->delete();
+        return redirect()->route('competencia.index');
     }
 }
