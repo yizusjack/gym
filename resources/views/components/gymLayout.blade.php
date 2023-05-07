@@ -100,6 +100,13 @@
           <i class="bi bi-person-plus-fill"></i>
           <span>Agregar gimnasta</span>
         </a>
+      </li>
+      
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{{route('competencia.index')}}">
+          <i class="bi bi-layout-text-window-reverse"></i>
+          <span>Competencias</span>
+        </a>
       </li><!-- End Dashboard Nav -->
 
 

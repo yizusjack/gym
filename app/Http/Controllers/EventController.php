@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pais;
 use App\Models\Event;
+use App\Models\Competencia;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class EventController extends Controller
 {
@@ -20,7 +23,7 @@ class EventController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -28,7 +31,17 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+        $request->validate([
+            'nombre_e' => ['required', 'max:255'],
+            'fecha_i_e'=> ['required', 'date'],
+            'fecha_f_e'=> ['required', 'date'],
+            'paises_id'=> ['required'],
+            'competencias_id'=> ['required'],
+        ]);
+        $request['user_id'] = Auth::user()->id;
+        Event::create($request->all());
+        return redirect()->route('competencia.show', $request->competencias_id);
     }
 
     /**
@@ -44,7 +57,9 @@ class EventController extends Controller
      */
     public function edit(Event $event)
     {
-        //
+        $paises = Pais::orderBy('nombre_p')->get();
+        $competencias = Competencia::all();
+        return view('events.editEvent', compact('paises', 'event', 'competencias'));
     }
 
     /**
@@ -52,7 +67,17 @@ class EventController extends Controller
      */
     public function update(Request $request, Event $event)
     {
-        //
+        $request->validate([
+            'nombre_e' => ['required', 'max:255'],
+            'fecha_i_e'=> ['required', 'date'],
+            'fecha_f_e'=> ['required', 'date'],
+            'paises_id'=> ['required'],
+            'competencias_id'=> ['required'],
+        ]);
+        
+        Event::where('id', $event->id)->update($request->except('_token', '_method')); /*Searchs up for the gymnast and updates it with the request exceptuating the token and method*/
+
+        return redirect()->route('competencia.show', $request->competencias_id);
     }
 
     /**
@@ -60,6 +85,13 @@ class EventController extends Controller
      */
     public function destroy(Event $event)
     {
-        //
+        $event->delete();
+        return redirect()->route('competencia.index');
+    }
+
+    public function newEvent(Competencia $competencia)
+    {
+        $paises = Pais::orderBy('nombre_p')->get();
+        return view('events.createEvent', compact('paises', 'competencia'));
     }
 }

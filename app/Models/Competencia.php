@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Event;
 
 class Competencia extends Model
 {
@@ -12,4 +13,8 @@ class Competencia extends Model
     public $timestamps = false;
 
     protected $fillable = ['nombre_c', 'tipo_c',];
+
+    public function events(){
+        return $this->hasMany(Event::class);
+    }
 }

@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Competencia;
+use App\Models\Event;
+use App\Models\Pais;
 use Illuminate\Http\Request;
+use Illuminate\Contracts\Database\Eloquent\Builder;
 
 class CompetenciaController extends Controller
 {
@@ -42,7 +45,8 @@ class CompetenciaController extends Controller
      */
     public function show(Competencia $competencia)
     {
-        return view('competencias.showCompetencia', compact('competencia'));
+       $events= Event::with('paises')->where('competencias_id', '=', $competencia->id)->get();
+        return view('competencias.showCompetencia', compact('competencia', 'events'));
     }
 
     /**
@@ -50,7 +54,7 @@ class CompetenciaController extends Controller
      */
     public function edit(Competencia $competencia)
     {
-        return view('competencias/editCompetencia', compact('competencia'));
+        return view('competencias.editCompetencia', compact('competencia'));
     }
 
     /**

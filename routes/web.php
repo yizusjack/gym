@@ -3,6 +3,7 @@
 use App\Models\Pais;
 use App\Models\Gimnasta;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\EventController;
 use App\Http\Controllers\PictureController;
 use App\Http\Controllers\GimnastaController;
 use App\Http\Controllers\CompetenciaController;
@@ -47,7 +48,13 @@ Route::get('gimnasta/galeria/{gimnasta}',
     [GimnastaController::class, 'galeria'])
     ->name('gimnasta.galeria');
 
-Route::resource('picture', PictureController::class);
+Route::resource('picture', PictureController::class)->middleware('auth');
+
+Route::resource('event', EventController::class)->middleware('auth');
+
+Route::get('event/add-event/{competencia}',
+    [EventController::class, 'newEvent'])
+    ->name('event.newEvent');
 
 View::composer(['*'], function($view){
     $gimnastas = Gimnasta::all();

@@ -16,4 +16,8 @@ class Pais extends Model
     public function gimnastas(){
         return $this->hasMany(Gimnasta::class);
     }
+
+    public function events(){
+        return $this->hasMany(Event::class);
+    }
 }
