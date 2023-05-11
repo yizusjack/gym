@@ -20,7 +20,8 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         $this->call([
-            //AparatoSeeder::class,
+            PaisesSeeder::class,
+            AparatoSeeder::class,
             RoundSeeder::class,
         ]);
     }

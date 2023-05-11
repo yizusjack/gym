@@ -18,10 +18,14 @@
         </thead>
         <tbody>
             @foreach ($events as $event)
+                @php
+                    $fechaI = new DateTime($event->fecha_i_e);
+                    $fechaF = new DateTime($event->fecha_f_e);
+                @endphp
                 <tr>
                     <td>{{$event->nombre_e}}</td>
-                    <td>{{$event->fecha_i_e}}</td>
-                    <td>{{$event->fecha_f_e}}</td>
+                    <td>{{$fechaI->format('d')}}-{{$fechaI->format('m')}}-{{$fechaI->format('Y')}}</td>
+                    <td>{{$fechaF->format('d')}}-{{$fechaF->format('m')}}-{{$fechaF->format('Y')}}</td>
                     <td><x-dynamic-component component="flag-country-{{$event->paises->iso2code_p}}" class="d-inline-block w-6 h-6"/> {{$event->paises->nombre_p}}</td>
                     <td>
                         @can('editEvent', $event)

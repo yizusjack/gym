@@ -7,6 +7,7 @@ use App\Models\Event;
 use App\Models\Competencia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Auth\Access\Response;
 
 class EventController extends Controller
 {
@@ -31,9 +32,8 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
-        
-        $request->validate([
-            'nombre_e' => ['required', 'max:255'],
+         $request->validate([
+             'nombre_e' => ['required', 'max:255'],
             'fecha_i_e'=> ['required', 'date'],
             'fecha_f_e'=> ['required', 'date'],
             'paises_id'=> ['required'],
@@ -57,6 +57,7 @@ class EventController extends Controller
      */
     public function edit(Event $event)
     {
+        $this->authorize('update', $event);
         $paises = Pais::orderBy('nombre_p')->get();
         $competencias = Competencia::all();
         return view('events.editEvent', compact('paises', 'event', 'competencias'));
@@ -66,18 +67,23 @@ class EventController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, Event $event)
-    {
-        $request->validate([
-            'nombre_e' => ['required', 'max:255'],
-            'fecha_i_e'=> ['required', 'date'],
-            'fecha_f_e'=> ['required', 'date'],
-            'paises_id'=> ['required'],
-            'competencias_id'=> ['required'],
-        ]);
-        
-        Event::where('id', $event->id)->update($request->except('_token', '_method')); /*Searchs up for the gymnast and updates it with the request exceptuating the token and method*/
+    {   
+        if (Auth::user()->cannot('update', $event)) {
+            abort(404);
+       }
+       if ($response->allowed()) {
+            $request->validate([
+                'nombre_e' => ['required', 'max:255'],
+                'fecha_i_e'=> ['required', 'date'],
+                'fecha_f_e'=> ['required', 'date'],
+                'paises_id'=> ['required'],
+                'competencias_id'=> ['required'],
+            ]);
+                
+            Event::where('id', $event->id)->update($request->except('_token', '_method')); /*Searchs up for the gymnast and updates it with the request exceptuating the token and method*/
 
-        return redirect()->route('competencia.show', $request->competencias_id);
+            return redirect()->route('competencia.show', $request->competencias_id);
+        }
     }
 
     /**
@@ -85,6 +91,8 @@ class EventController extends Controller
      */
     public function destroy(Event $event)
     {
+        $this->authorize('delete', $event);
+        
         $event->delete();
         return redirect()->route('competencia.index');
     }

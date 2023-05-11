@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Picture;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PictureController extends Controller
 {
@@ -12,7 +13,9 @@ class PictureController extends Controller
      */
     public function index()
     {
-        //
+        $pictures = Picture::all();
+
+        return view('pictures.indexPicture', compact('pictures'));
     }
 
     /**
@@ -72,6 +75,8 @@ class PictureController extends Controller
      */
     public function destroy(Picture $picture)
     {
-        //
+        Storage::delete($picture->hash);
+        $picture->delete();
+        return redirect()->route('picture.index');
     }
 }
