@@ -14,7 +14,7 @@ class GimnastaController extends Controller
      */
     public function index()
     {
-        $gimnastas = Gimnasta::with('paises')->get(); //Using 'with' we are implementing eager loading
+        $gimnastas = Gimnasta::with('paises')->paginate(10); //Using 'with' we are implementing eager loading
         return view('gimnastas.indexGimnasta', compact('gimnastas'));
     }
 

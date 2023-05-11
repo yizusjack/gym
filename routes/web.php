@@ -57,6 +57,6 @@ Route::get('event/add-event/{competencia}',
     ->name('event.newEvent');
 
 View::composer(['*'], function($view){
-    $gimnastas = Gimnasta::all();
-    $view->with('gimnastas', $gimnastas);
+    $gimn = Gimnasta::all();
+    $view->with('gimn', $gimn);
 });

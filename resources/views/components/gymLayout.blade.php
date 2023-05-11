@@ -85,7 +85,7 @@
           <i class="bi bi-person-lines-fill"></i><span>Gimnastas</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
         <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-            @foreach ($gimnastas as $gim)
+            @foreach ($gimn as $gim)
                <li>
                    <a href="{{route('gimnasta.show', $gim->id)}}">
                        <i class="bi bi-circle"></i><span>{{$gim->nombre_g}} {{$gim->apellido_g}}</span>
