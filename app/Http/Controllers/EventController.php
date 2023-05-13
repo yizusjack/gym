@@ -4,10 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Pais;
 use App\Models\Event;
+use App\Models\Score;
 use App\Models\Competencia;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Auth\Access\Response;
+use Illuminate\Support\Facades\Auth;
 
 class EventController extends Controller
 {
@@ -49,7 +50,8 @@ class EventController extends Controller
      */
     public function show(Event $event)
     {
-        //
+        //$scores= Score::with(['gimnastas', 'events', 'rounds', 'aparatos'])->where('events_id', '=', $event->id)->get();
+        return view('scores.scoresIndex', compact('event'));
     }
 
     /**

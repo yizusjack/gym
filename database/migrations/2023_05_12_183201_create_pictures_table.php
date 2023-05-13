@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('nombre');
             $table->string('extension');
             $table->string('mime');
-            $table->foreignId('gimnastas_id')->constrained();
+            $table->foreignId('gimnastas_id')->constrained()->onDelete('cascade');
         });
     }
 

@@ -51,8 +51,5 @@
       
       {{$gimnastas->links()}}
 
-
-    
-    
     <x/slot>
 </x-gymLayout>

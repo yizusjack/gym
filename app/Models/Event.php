@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Score;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Event extends Model
 {
@@ -25,4 +26,9 @@ class Event extends Model
     public function paises(){
         return $this->belongsTo(Pais::class);
     }
+
+    public function scores(){
+        return $this->hasMany(Score::class);
+    }
+ 
 }

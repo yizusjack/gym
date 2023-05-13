@@ -35,6 +35,9 @@
               @endif>{{$cont->nombre_p}}</option>
             @endforeach
           </select>
+          @error('paises_id')
+                <h5>{{$message}}</h5>
+            @enderror
         </div>
         <div class="text-center">
           <button type="submit" class="btn btn-primary">Enviar</button>

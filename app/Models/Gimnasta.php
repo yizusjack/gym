@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Score;
 use App\Models\Picture;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -19,6 +20,10 @@ class Gimnasta extends Model
 
     public function pictures(){
         return $this->hasMany(Picture::class);
+    }
+
+    public function scores(){
+        return $this->hasMany(Score::class);
     }
 
     protected $fillable = ['nombre_g', 'apellido_g', 'fecha_n_g', 'paises_id',];

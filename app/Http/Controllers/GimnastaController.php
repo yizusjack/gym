@@ -36,6 +36,7 @@ class GimnastaController extends Controller
             'nombre_g' => ['required', 'max:255'],
             'apellido_g' => ['required', 'max:255'],
             'fecha_n_g'=> ['required', 'date'],
+            'paises_id'=>['required', 'exists:paises,id'],
         ]);
         Gimnasta::create($request->all()); 
         return redirect('gimnasta');
@@ -70,6 +71,7 @@ class GimnastaController extends Controller
             'nombre_g' => ['required', 'max:255'],
             'apellido_g' => ['required', 'max:255'],
             'fecha_n_g'=> ['required', 'date'],
+            'paises_id'=>['required', 'exists:paises,id'],
         ]);
         
         /*$gimnasta->nombre_g = $request->nombre_g;
