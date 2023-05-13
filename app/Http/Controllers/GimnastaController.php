@@ -6,6 +6,7 @@ use App\Models\Pais;
 use App\Models\Picture;
 use App\Models\Gimnasta;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class GimnastaController extends Controller
 {
@@ -89,6 +90,10 @@ class GimnastaController extends Controller
      */
     public function destroy(Gimnasta $gimnasta)
     {
+        $pics = Picture::where('gimnastas_id', '=', $gimnasta->id)->get();
+        foreach($pics as $pic){
+            Storage::delete($pic->hash); //elimina todas las imagenes relacionadas a la gimnasta a eliminar
+        }
         $gimnasta->delete();
         return redirect()->route('gimnasta.index');
     }
