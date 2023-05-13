@@ -37,8 +37,8 @@ class EventController extends Controller
              'nombre_e' => ['required', 'max:255'],
             'fecha_i_e'=> ['required', 'date'],
             'fecha_f_e'=> ['required', 'date'],
-            'paises_id'=> ['required'],
-            'competencias_id'=> ['required'],
+            'paises_id'=> ['required', 'exists:paises,id'],
+            'competencias_id'=>['required', 'exists:competencias,id'],
         ]);
         $request['user_id'] = Auth::user()->id;
         Event::create($request->all());
@@ -78,8 +78,8 @@ class EventController extends Controller
                 'nombre_e' => ['required', 'max:255'],
                 'fecha_i_e'=> ['required', 'date'],
                 'fecha_f_e'=> ['required', 'date'],
-                'paises_id'=> ['required'],
-                'competencias_id'=> ['required'],
+                'paises_id'=> ['required', 'exists:paises,id'],
+                'competencias_id'=>['required', 'exists:competencias,id'],
             ]);
                 
             Event::where('id', $event->id)->update($request->except('_token', '_method')); /*Searchs up for the gymnast and updates it with the request exceptuating the token and method*/

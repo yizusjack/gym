@@ -18,7 +18,7 @@ return new class extends Migration
             $table->date('fecha_f_e');
             $table->foreignId('user_id')->constrained('users');
             $table->foreignId('paises_id')->constrained();
-            $table->foreignId('competencias_id')->constrained();
+            $table->foreignId('competencias_id')->constrained()->onDelete('cascade');
         });
     }
 

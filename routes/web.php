@@ -77,8 +77,8 @@ Route::patch('score/{score}',
     ->name('score.update');
 
 Route::delete('score/{score}',
-    [ScoreController::class, 'delete'])
-    ->name('score.delete');
+    [ScoreController::class, 'destroy'])
+    ->name('score.destroy');
 
 
 View::composer(['*'], function($view){
