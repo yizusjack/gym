@@ -33,7 +33,7 @@ class PictureController extends Controller
     {
         if($request->hasFile('picture') && $request->file('picture')->isValid()){
             $route = $request->picture->store('public');
-
+            $ret = $request->gimnastas_id;
             $pictures = new Picture();
             $pictures->hash = $route;
             $pictures->nombre = $request->picture->getClientOriginalName();
@@ -43,7 +43,7 @@ class PictureController extends Controller
             $pictures->save();
 
         }
-        return redirect('gimnasta');
+        return redirect()->route('gimnasta.show', $ret);
     }
 
     /**

@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Equipo;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Pais extends Model
 {
@@ -19,5 +20,9 @@ class Pais extends Model
 
     public function events(){
         return $this->hasMany(Event::class);
+    }
+
+    public function equipos(){
+        return $this->hasMany(Equipo::class);
     }
 }

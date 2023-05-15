@@ -1,8 +1,8 @@
 <x-gymLayout>
     <x-slot:title>
-        Galeria {{$gimnasta->nombre_g}}
+        Galeria {{$gimnasta->nombre_g}} {{$gimnasta->apellido_g}}
     </x-slot>
-    <h1>Galeria</h1>
+    <h1>{{$gimnasta->nombre_g}} {{$gimnasta->apellido_g}}</h1>
 
     <section id="galeria" class="container">
         <div class="row">

@@ -6,7 +6,7 @@ use App\Models\Score;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
 
-class PostPolicy
+class ScorePolicy
 {
     /**
      * Determine whether the user can view any models.
