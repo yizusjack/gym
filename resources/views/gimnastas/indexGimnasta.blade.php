@@ -52,4 +52,17 @@
       {{$gimnastas->links()}}
 
     <x/slot>
+
+    @section('js')
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+        @if(session('gimnasta')== 'agregada')
+            <script>
+                Swal.fire(
+                    '¡Éxito!',
+                    'Registro agregado.',
+                    'success'
+                )
+            </script>
+        @endif
+    @endsection
 </x-gymLayout>
