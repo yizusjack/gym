@@ -7,6 +7,7 @@ use App\Models\Event;
 use App\Models\Equipo;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Illuminate\Support\Facades\DB;
 
 class EquiposIndex extends Component
 {
@@ -38,7 +39,11 @@ class EquiposIndex extends Component
 
     public function update(){
         $this->validate();
-
+        if($this->equipo->paises_id != $this->paises_id){ //Si el país del equipo cambió
+            $deleted = DB::table('equipo_gimnasta')
+            ->where('equipo_id', $this->equipo_id) //elimina las entradas de gimnastas en ese equipo
+            ->delete();
+        }
         Equipo::where("id", $this->equipo_id)->update([
             'paises_id' => $this->paises_id,
             'events_id' => $this->events_id,

@@ -46,7 +46,7 @@
                       </form>
                     </td>
                     <td class='text-center'>
-                        <a href="">
+                        <a href="{{route('equipo.show', $equipo)}}">
                             <i class="bi bi-info-circle-fill"></i>
                         </a>
                     </td> 

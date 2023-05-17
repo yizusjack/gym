@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Score;
+use App\Models\Equipo;
 use App\Models\Picture;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -24,6 +25,10 @@ class Gimnasta extends Model
 
     public function scores(){
         return $this->hasMany(Score::class);
+    }
+
+    public function equipos(){
+        return $this->belongsToMany(Equipo::class)->withPivot('alternate_g');
     }
 
     protected $fillable = ['nombre_g', 'apellido_g', 'fecha_n_g', 'paises_id',];

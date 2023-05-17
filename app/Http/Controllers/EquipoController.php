@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Equipo;
+use App\Models\Gimnasta;
 use Illuminate\Http\Request;
 
 class EquipoController extends Controller
@@ -42,7 +43,8 @@ class EquipoController extends Controller
      */
     public function show(Equipo $equipo)
     {
-        //
+        $gimnastas = Gimnasta::where('paises_id', $equipo->paises_id)->get();
+        return view('equipos.showEquipo', compact('gimnastas', 'equipo'));
     }
 
     /**
@@ -68,5 +70,21 @@ class EquipoController extends Controller
     {
         $equipo->delete();
         return redirect()->route('equipo.index');
+    }
+
+    public function adminEquipos(Request $request, Equipo $equipo)
+    {
+        if($request->alternate_g=="true"){
+            $val=true;
+        }
+        else{
+            $val=false;
+        }
+        foreach($request->gimnasta_id as $gim){
+            $equipo->gimnastas()->toggle([$gim=> ['alternate_g' => $val]]);
+        }
+        //dd($gim);
+        //$equipo->gimnastas()->toggle($request->gimnasta_id, ['alternate_g' => true]);
+        return redirect()->route('equipo.show', $equipo);
     }
 }

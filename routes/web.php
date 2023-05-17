@@ -96,6 +96,11 @@ Route::delete('score/{score}',
 //EQUIPOS
 Route::resource('equipo', EquipoController::class)->middleware('auth');
 
+Route::post('equipo/administrar/{equipo}',
+    [EquipoController::class, 'adminEquipos'])
+    ->name('equipo.admin')
+    ->middleware('auth');
+
 
 View::composer(['*'], function($view){
     $gimn = Gimnasta::all();
