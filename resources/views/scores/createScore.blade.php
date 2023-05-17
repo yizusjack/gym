@@ -7,7 +7,7 @@
       @csrf
       <div class="col-md-4">
         <label for="gimnastas_id" class="form-label">Gimnasta: </label> <br>
-        <select name="gimnastas_id" id="gimnastas_id" class="form-control">
+        <select name="gimnastas_id" id="gimnastas_id" class="form-control" required>
           @foreach($gimnastas as $gimnasta)
             <option value="{{$gimnasta->id}}" @if (old('gimnastas_id')==$gimnasta->id) 
                 selected
@@ -21,7 +21,7 @@
 
       <div class="col-md-4">
         <label for="rounds_id" class="form-label">Ronda: </label> <br>
-        <select name="rounds_id" id="rounds_id" class="form-control">
+        <select name="rounds_id" id="rounds_id" class="form-control" required>
           @foreach($rounds as $round)
             <option value="{{$round->id}}" @if (old('rounds_id')==$round->id) 
                 selected
@@ -35,7 +35,7 @@
 
       <div class="col-md-4">
         <label for="aparatos_id" class="form-label">Aparato: </label> <br>
-        <select name="aparatos_id" id="aparatos_id" class="form-control">
+        <select name="aparatos_id" id="aparatos_id" class="form-control" required>
           @foreach($aparatos as $aparato)
             <option value="{{$aparato->id}}" @if (old('aparatos_id')==$aparato->id) 
                 selected
@@ -49,7 +49,7 @@
 
       <div class="col-md-4">
         <label for="difficulty_s" class="form-label">Dificultad: </label>
-        <input type="number" step="any" class="form-control" name="difficulty_s" id="difficulty_s" value="{{old('difficulty_s')}}">
+        <input type="number" step="any" class="form-control" name="difficulty_s" id="difficulty_s" value="{{old('difficulty_s')}}" required>
           @error('difficulty_s')
               <h5>{{$message}}</h5>
           @enderror
@@ -57,7 +57,7 @@
 
       <div class="col-md-4">
         <label for="execution_s" class="form-label">Ejecución: </label>
-        <input type="number" step="any" class="form-control" name="execution_s" id="execution_s" value="{{old('execution_s')}}">
+        <input type="number" step="any" class="form-control" name="execution_s" id="execution_s" value="{{old('execution_s')}}" required>
           @error('execution_s')
               <h5>{{$message}}</h5>
           @enderror
@@ -65,7 +65,7 @@
 
       <div class="col-md-4">
         <label for="deductions_s" class="form-label">Deducciones: </label>
-        <input type="number"step="any" class="form-control" name="deductions_s" id="deductions_s" value="{{old('deductions_s')}}">
+        <input type="number"step="any" class="form-control" name="deductions_s" id="deductions_s" value="{{old('deductions_s')}}" required>
           @error('deductions_s')
               <h5>{{$message}}</h5>
           @enderror

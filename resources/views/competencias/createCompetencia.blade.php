@@ -8,7 +8,7 @@
 
         <div class="col-12">
           <label for="nombre_c" class="form-label">Nombre: </label>
-          <input type="text" class="form-control" name="nombre_c" id="nombre_c" value={{old('nombre_c')}}>
+          <input type="text" class="form-control" name="nombre_c" id="nombre_c" required value="{{old('nombre_c')}}" >
             @error('nombre_c')
                 <h5>{{$message}}</h5>
             @enderror
@@ -16,7 +16,7 @@
 
         <div class="col-12">
           <label for="tipo_c" class="form-label">Tipo: </label> <br>
-          <select name="tipo_c"  class="form-control" id="tipo_c">
+          <select name="tipo_c"  class="form-control" id="tipo_c" required>
             <option value="1" @if (old('tipo_c')==1) 
                   selected
               @endif>Nacional</option>

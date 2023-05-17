@@ -13,7 +13,7 @@
             <th scope="col">Pais</th>
             <th scope="col"></th>
             <th scope="col"></th>
-            <th class='text-center' scope="col">Ver detalle</th>
+            <th class='text-center' scope="col">Resultados</th>
           </tr>
         </thead>
         <tbody>

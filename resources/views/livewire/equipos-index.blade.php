@@ -58,13 +58,13 @@
 
 
       <x-dialog-modal wire:model='displayEdit'>
-        <x-slot name='title'> Nuevo equipo</x-slot>
+        <x-slot name='title'> Editar equipo</x-slot>
         <x-slot name='content'>
             <form wire:submit.prevent="update" class="row g-3" method="POST">
                 @csrf
                 <div class="col-md-6">
                   <label for="paises_id" class="form-label">Pais: </label> <br>
-                  <select name="paises_id" id="paises_id" class="form-control" wire:model='paises_id'>
+                  <select name="paises_id" id="paises_id" class="form-control" wire:model='paises_id' required>
                     <option value="">-</option>
                     @foreach($paises as $pais)
                       <option value="{{$pais->id}}" @if ($pais->id == $equipo->paises_id) 
@@ -77,7 +77,7 @@
 
                 <div class="col-md-6">
                     <label for="events_id" class="form-label">Evento: </label> <br>
-                    <select name="events_id" id="events_id" class="form-control" wire:model='events_id'>
+                    <select name="events_id" id="events_id" class="form-control" wire:model='events_id' required>
                         <option value="">-</option>
                       @foreach($events as $event)
                         <option value="{{$event->id}}" @if ($event->id == $equipo->events_id) 
