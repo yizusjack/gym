@@ -74,6 +74,10 @@ class EquipoController extends Controller
 
     public function adminEquipos(Request $request, Equipo $equipo)
     {
+        $request->validate([
+            'gimnasta_id' => ['required'],
+            'alternate_g' => ['required'],
+        ]);
         if($request->alternate_g=="true"){
             $val=true;
         }

@@ -35,5 +35,11 @@ class Event extends Model
     public function equipos(){
         return $this->hasMany(Equipo::class);
     }
+
+    protected function nombreE(): Attribute{
+        return new Attribute(
+            set: fn($value) => ucwords($value) 
+        );
+    }
  
 }

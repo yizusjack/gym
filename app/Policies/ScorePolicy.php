@@ -35,7 +35,7 @@ class ScorePolicy
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Score $score): bool
+    public function update(User $user, Score $score): response
     {
         return $user->id === $score->user_id
             ? Response::allow()
@@ -45,7 +45,7 @@ class ScorePolicy
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Score $score): bool
+    public function delete(User $user, Score $score): response
     {
         return $user->id === $score->user_id
             ? Response::allow()

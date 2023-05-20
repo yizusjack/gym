@@ -6,6 +6,7 @@ use App\Models\Score;
 use App\Models\Equipo;
 use App\Models\Picture;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 
@@ -32,4 +33,16 @@ class Gimnasta extends Model
     }
 
     protected $fillable = ['nombre_g', 'apellido_g', 'fecha_n_g', 'paises_id',];
+
+    protected function nombreG(): Attribute{
+        return new Attribute(
+            set: fn($value) => ucwords($value) //mutator, cambia la primera letra a mayúscula
+        );
+    }
+
+    protected function apellidoG(): Attribute{
+        return new Attribute(
+            set: fn($value) => ucwords($value) 
+        );
+    }
 }

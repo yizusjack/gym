@@ -49,7 +49,7 @@ class ScoreController extends Controller
        $request['user_id'] = Auth::user()->id;
        $request['total_s'] = $request->difficulty_s + $request->execution_s - $request->deductions_s;
        Score::create($request->all());
-       return redirect()->route('event.show', $request->events_id);
+       return redirect()->route('event.show', $request->events_id)->with('score', 'agregada');
     }
 
     /**
@@ -93,7 +93,7 @@ class ScoreController extends Controller
 
         Score::where('id', $score->id)->update($request->except('_token', '_method'));
 
-        return redirect()->route('event.show', $request->events_id);;
+        return redirect()->route('event.show', $request->events_id)->with('score', 'editada');
     }
 
     /**
@@ -104,6 +104,6 @@ class ScoreController extends Controller
         $this->authorize('delete', $score);
         $event=$score->events_id;
         $score->delete();
-        return redirect()->route('event.show', $event);
+        return redirect()->route('event.show', $event)->with('score', 'eliminada');
     }
 }

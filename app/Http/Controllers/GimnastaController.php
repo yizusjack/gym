@@ -18,7 +18,9 @@ class GimnastaController extends Controller
      */
     public function index()
     {
-        $gimnastas = Gimnasta::with('paises')->paginate(10); //Using 'with' we are implementing eager loading
+        $gimnastas = Gimnasta::with('paises')
+        ->orderBy("paises_id")
+        ->paginate(10); //Using 'with' we are implementing eager loading
         return view('gimnastas.indexGimnasta', compact('gimnastas'));
     }
 
@@ -89,7 +91,7 @@ class GimnastaController extends Controller
         $action = "editado";
         $this->sendMail($nombreGimnasta, $action);
 
-        return redirect()->route('gimnasta.show', $gimnasta);
+        return redirect()->route('gimnasta.show', $gimnasta)->with('gimnasta', 'editada');
     }
 
     /**
@@ -105,7 +107,7 @@ class GimnastaController extends Controller
         $action = "eliminado";
         $gimnasta->delete();
         $this->sendMail($nombreGimnasta, $action);
-        return redirect()->route('gimnasta.index');
+        return redirect()->route('gimnasta.index')->with('gimnasta', 'eliminada');
     }
 
     /**

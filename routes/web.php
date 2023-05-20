@@ -3,6 +3,7 @@
 use App\Models\Pais;
 use App\Models\Gimnasta;
 use Illuminate\Support\Facades\Route;
+use App\Http\Resources\gimnastaResource;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\ScoreController;
 use App\Http\Controllers\EquipoController;
@@ -22,7 +23,7 @@ use App\Http\Controllers\CompetenciaController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('inicio');
 });
 
 Route::middleware([
@@ -100,6 +101,13 @@ Route::post('equipo/administrar/{equipo}',
     [EquipoController::class, 'adminEquipos'])
     ->name('equipo.admin')
     ->middleware('auth');
+
+
+Route::get('/gimnastas', function () {
+    return gimnastaResource::collection(Gimnasta::all());
+})
+->name('gimnasta.json')
+->middleware('auth');
 
 
 View::composer(['*'], function($view){

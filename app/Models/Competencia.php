@@ -17,4 +17,10 @@ class Competencia extends Model
     public function events(){
         return $this->hasMany(Event::class);
     }
+
+    protected function nombreC(): Attribute{
+        return new Attribute(
+            set: fn($value) => ucwords($value) 
+        );
+    }
 }

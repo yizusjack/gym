@@ -134,4 +134,16 @@
             </div>
         </div>
     </div>
+    @section('js')
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+        @if(session('gimnasta')== 'editada')
+            <script>
+                Swal.fire(
+                    '¡Éxito!',
+                    'Registro modificado.',
+                    'info'
+                )
+            </script>
+        @endif
+    @endsection
 </x-gymLayout>
