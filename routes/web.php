@@ -94,6 +94,11 @@ Route::delete('score/{score}',
     ->name('score.destroy')
     ->middleware('auth');
 
+Route::get('score',
+    [ScoreController::class, 'index'])
+    ->name('score.index')
+    ->middleware('auth');
+
 //EQUIPOS
 Route::resource('equipo', EquipoController::class)->middleware('auth');
 
@@ -110,7 +115,7 @@ Route::get('/gimnastas', function () {
 ->middleware('auth');
 
 
-View::composer(['*'], function($view){
+View::composer(['*'], function($view){ //envia informacion a todas las vistas
     $gimn = Gimnasta::all();
     $view->with('gimn', $gimn);
 });

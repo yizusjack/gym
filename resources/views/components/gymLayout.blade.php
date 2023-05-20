@@ -107,7 +107,28 @@
           <i class="bi bi-layout-text-window-reverse"></i>
           <span>Competencias</span>
         </a>
-      </li><!-- End Dashboard Nav -->
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{{route('equipo.index')}}">
+          <i class="ri-team-fill"></i>
+          <span>Equipos</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{{route('score.index')}}">
+          <i class="bx bx-list-check"></i>
+          <span>Puntuaciones</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{{route('picture.index')}}">
+          <i class="ri-image-edit-fill"></i>
+          <span>Gestionar imágenes</span>
+        </a>
+      </li>
 
 
       <li class="nav-heading">Redes</li>
