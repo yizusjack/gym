@@ -18,9 +18,13 @@
           @endforeach
       </select>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-1">
       <br>
       <a href="{{route('score.create', $event)}}"><button type="button" class="btn btn-success">+</button></a>
+    </div>
+    <div class="col-md-1">
+      <br>
+      <a href="{{route('score.pdf', $event)}}" target="_blank"><button type="button" class="btn btn-success"><i class="bx bxs-file-pdf"></i></button></a>
     </div>
   </div>
   <table class="table table-striped">

@@ -9,6 +9,7 @@ use App\Models\Aparato;
 use App\Models\Gimnasta;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class ScoreController extends Controller
 {
@@ -105,5 +106,55 @@ class ScoreController extends Controller
         $event=$score->events_id;
         $score->delete();
         return redirect()->route('event.show', $event)->with('score', 'eliminada');
+    }
+
+    /**
+     * Creates the PDF file with scores
+     */
+    public function createpdf(Event $event){
+        $scoresQ= Score::query()
+        ->with(['gimnastas', 'events', 'rounds', 'aparatos'])
+        ->where('events_id', $event->id)
+        ->where('rounds_id', 1)
+        ->orderBy('aparatos_id')
+        ->orderBy('total_s', 'desc')
+        ->orderBy('execution_s', 'desc')
+        ->orderBy('difficulty_s', 'desc')
+        ->get();
+
+        $scoresT= Score::query()
+        ->with(['gimnastas', 'events', 'rounds', 'aparatos'])
+        ->where('events_id', $event->id)
+        ->where('rounds_id', 2)
+        ->orderBy('aparatos_id')
+        ->orderBy('total_s', 'desc')
+        ->orderBy('execution_s', 'desc')
+        ->orderBy('difficulty_s', 'desc')
+        ->get();
+
+        $scoresA= Score::query()
+        ->with(['gimnastas', 'events', 'rounds', 'aparatos'])
+        ->where('events_id', $event->id)
+        ->where('rounds_id', 3)
+        ->orderBy('aparatos_id')
+        ->orderBy('total_s', 'desc')
+        ->orderBy('execution_s', 'desc')
+        ->orderBy('difficulty_s', 'desc')
+        ->get();
+
+        $scoresE= Score::query()
+        ->with(['gimnastas', 'events', 'rounds', 'aparatos'])
+        ->where('events_id', $event->id)
+        ->where('rounds_id', 4)
+        ->orderBy('aparatos_id')
+        ->orderBy('total_s', 'desc')
+        ->orderBy('execution_s', 'desc')
+        ->orderBy('difficulty_s', 'desc')
+        ->get();
+
+        //$pdf = Pdf::loadView('scores.scorepdf', compact('scoresQ'));
+        //return $pdf->stream()->setOptions(['defaultFont' => 'sans-serif']);
+        $pdf = PDF::loadView('scores.scorepdf', compact('scoresQ', 'scoresT', 'scoresA', 'scoresE', 'event'))->setOptions(['defaultFont' => 'sans-serif']);
+        return $pdf->stream();
     }
 }

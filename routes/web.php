@@ -99,6 +99,11 @@ Route::get('score',
     ->name('score.index')
     ->middleware('auth');
 
+Route::get('score/{event}/pdf',
+    [ScoreController::class, 'createpdf'])
+    ->name('score.pdf')
+    ->middleware('auth');
+
 //EQUIPOS
 Route::resource('equipo', EquipoController::class)->middleware('auth');
 
