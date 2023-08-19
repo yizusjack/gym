@@ -32,9 +32,9 @@
                     @error('events_id') <span class="error">{{ $message }}</span> @enderror
                 </div>
                 
-                <div class="text-center">
+                <div class="row text-center">
                   <button wire.click="save" type="submit" class="btn btn-primary">Enviar</button>
-                  <button type="reset" class="btn btn-secondary">Limpiar</button>
+                  <button type="button" class="btn btn-secondary">Limpiar</button>
                 </div>
               </form>
         </x-slot>

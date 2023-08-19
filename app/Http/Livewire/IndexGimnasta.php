@@ -16,6 +16,7 @@ class IndexGimnasta extends Component
 
     public $paisesFilter;
     public $nombreFilter;
+    public $display=false;
 
     protected $paginationTheme = 'bootstrap';
 

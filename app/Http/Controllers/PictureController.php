@@ -43,7 +43,7 @@ class PictureController extends Controller
             $pictures->save();
 
         }
-        return redirect()->route('gimnasta.show', $ret);
+        return redirect()->route('gimnasta.show', $request->gimnastas_id);
     }
 
     /**
