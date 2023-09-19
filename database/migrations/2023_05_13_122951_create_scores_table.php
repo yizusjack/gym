@@ -23,7 +23,6 @@ return new class extends Migration
             $table->float('total_s', 6, 3);
             $table->foreignId('user_id')->constrained('users');
             $table->softDeletes();
-            $table->boolean('approved')->default(false);
         });
     }
 
