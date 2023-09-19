@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         $this->call([
-            PaisesSeeder::class,
+            PaisSeeder::class,
             AparatoSeeder::class,
             RoundSeeder::class,
         ]);
