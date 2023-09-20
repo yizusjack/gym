@@ -44,4 +44,8 @@ class Score extends Model
     public function aparatos(){
         return $this->belongsTo(Aparato::class);
     }
+
+    public function changeScores(){
+        return $this->hasMany(changeScore::class)
+    }
 }
