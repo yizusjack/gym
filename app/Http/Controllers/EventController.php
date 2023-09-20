@@ -114,7 +114,6 @@ class EventController extends Controller
         ->orderBy('execution_s', 'desc')
         ->orderBy('difficulty_s', 'desc')
         ->get();
-        //dd($scores);
         return view('events.controlI', compact('event', 'scores'));
     }
 }

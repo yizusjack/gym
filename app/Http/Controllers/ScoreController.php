@@ -98,12 +98,6 @@ class ScoreController extends Controller
         return redirect()->route('event.show', $request->events_id)->with('score', 'editada');
     }
 
-    public function aproveI(Score $score)
-    {
-        Score::where('id', $score->id)->update(['approved' => true]);
-
-        return redirect()->route('event.controlI', $score->events_id);
-    }
 
 
     /**
@@ -165,5 +159,24 @@ class ScoreController extends Controller
         //return $pdf->stream()->setOptions(['defaultFont' => 'sans-serif']);
         $pdf = PDF::loadView('scores.scorepdf', compact('scoresQ', 'scoresT', 'scoresA', 'scoresE', 'event'))->setOptions(['defaultFont' => 'sans-serif']);
         return $pdf->stream();
+    }
+
+    public function aproveI(Score $score) //aprobar
+    {
+        if($score->approved==0){
+            Score::where('id', $score->id)->update(['approved' => true]);
+        }
+
+        return redirect()->route('event.controlI', $score->events_id);
+    }
+
+    public function denyI(Score $score) //aprobar
+    {
+        $ret = $score->events_id;
+        if($score->approved==0){
+            $score->forceDelete();
+        }
+
+        return redirect()->route('event.controlI', $ret);
     }
 }

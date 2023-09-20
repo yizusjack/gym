@@ -38,7 +38,13 @@
                         </form>
                     </td>
                     <td>
-                        <button class='btn btn-danger'>✘</button>
+                        <form action="{{route('score.denyI', $score)}}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <div class='text-center'>
+                                <button class='btn btn-danger'>✘</button>
+                            </div>
+                        </form>
                     </td>
                 </tr>
             @endforeach

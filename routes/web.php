@@ -114,6 +114,11 @@ Route::patch('score/{score}/aproveI',
     ->name('score.aproveI')
     ->middleware('auth');
 
+Route::delete('score/{score}/denyI',
+    [ScoreController::class, 'denyI'])
+    ->name('score.denyI')
+    ->middleware('auth');
+
 //EQUIPOS
 Route::resource('equipo', EquipoController::class)->middleware('auth');
 
