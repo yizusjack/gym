@@ -49,6 +49,7 @@ class ScoreController extends Controller
        ]);
        $request['user_id'] = Auth::user()->id;
        $request['total_s'] = $request->difficulty_s + $request->execution_s - $request->deductions_s;
+       $request['approved'] = Auth::user()->is_admin == true ? true : false; //si es administrador la aprobará, de lo contrario la deniega
        Score::create($request->all());
        return redirect()->route('event.show', $request->events_id)->with('score', 'agregada');
     }
@@ -97,6 +98,14 @@ class ScoreController extends Controller
         return redirect()->route('event.show', $request->events_id)->with('score', 'editada');
     }
 
+    public function aproveI(Score $score)
+    {
+        Score::where('id', $score->id)->update(['approved' => true]);
+
+        return redirect()->route('event.controlI', $score->events_id);
+    }
+
+
     /**
      * Remove the specified resource from storage.
      */
@@ -105,7 +114,7 @@ class ScoreController extends Controller
         $this->authorize('delete', $score);
         $event=$score->events_id;
         $score->delete();
-        return redirect()->route('event.show', $event)->with('score', 'eliminada');
+        return redirect()->route('event.controlI');
     }
 
     /**

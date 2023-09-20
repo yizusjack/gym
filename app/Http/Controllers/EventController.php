@@ -104,4 +104,17 @@ class EventController extends Controller
         $paises = Pais::orderBy('nombre_p')->get();
         return view('events.createEvent', compact('paises', 'competencia'));
     }
+
+    public function controlI(Event $event)
+    {
+        $scores= Score::with(['gimnastas', 'events', 'rounds', 'aparatos'])
+        ->where('events_id', $event->id)
+        ->where('approved', 0) //solo regresa los registros no aprobados
+        ->orderBy('total_s', 'desc')
+        ->orderBy('execution_s', 'desc')
+        ->orderBy('difficulty_s', 'desc')
+        ->get();
+        //dd($scores);
+        return view('events.controlI', compact('event', 'scores'));
+    }
 }

@@ -68,6 +68,11 @@ Route::get('event/add-event/{competencia}',
     ->name('event.newEvent')
     ->middleware('auth');
 
+Route::get('event/{event}/controlI',
+    [EventController::class, 'controlI'])
+    ->name('event.controlI')
+    ->middleware('auth');
+
 //SCORES
 Route::get('score/create/{event}',
     [ScoreController::class, 'create'])
@@ -102,6 +107,11 @@ Route::get('score',
 Route::get('score/{event}/pdf',
     [ScoreController::class, 'createpdf'])
     ->name('score.pdf')
+    ->middleware('auth');
+
+Route::patch('score/{score}/aproveI',
+    [ScoreController::class, 'aproveI'])
+    ->name('score.aproveI')
     ->middleware('auth');
 
 //EQUIPOS

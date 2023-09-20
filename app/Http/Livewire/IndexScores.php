@@ -29,6 +29,7 @@ class IndexScores extends Component
         })
         ->with(['gimnastas', 'events', 'rounds', 'aparatos'])
         ->where('events_id', $this->event)
+        ->where('approved', true)
         ->orderBy('total_s', 'desc')
         ->orderBy('execution_s', 'desc')
         ->orderBy('difficulty_s', 'desc')
