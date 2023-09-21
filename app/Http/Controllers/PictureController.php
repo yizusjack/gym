@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Picture;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class PictureController extends Controller
@@ -40,6 +41,7 @@ class PictureController extends Controller
             $pictures->extension = $request->picture->guessExtension();
             $pictures->mime = $request->picture->getMimeType();
             $pictures->gimnastas_id = $request->gimnastas_id;
+            $pictures->approved = Auth::user()->is_admin == true ? true : false; //si es administrador la aprobará, de lo contrario la deniega
             $pictures->save();
 
         }
@@ -78,5 +80,22 @@ class PictureController extends Controller
         Storage::delete($picture->hash);
         $picture->delete();
         return redirect()->route('picture.index');
+    }
+
+    public function controlP()
+    {
+        $pictures = Picture::where('approved', false)->get();
+
+        return view('pictures.controlPicture', compact('pictures'));
+    }
+
+    public function aproveP(Picture $picture) //aprobar
+    {
+        //$this->authorize('approve', $score);
+        if($picture->approved==0){
+            Picture::where('id', $picture->id)->update(['approved' => true]);
+        }
+
+        return redirect()->route('picture.controlP');
     }
 }

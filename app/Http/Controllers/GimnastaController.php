@@ -59,7 +59,9 @@ class GimnastaController extends Controller
      */
     public function show(Gimnasta $gimnasta)
     {
-        $imagen = Picture::where('gimnastas_id', '=', $gimnasta->id)->get(); //Searches up for the pictures of the gymnast
+        $imagen = Picture::where('gimnastas_id', '=', $gimnasta->id)
+        ->where('approved', true)
+        ->get(); //Searches up for the pictures of the gymnast
         $paises= Pais::find($gimnasta->id);
         
         return view('gimnastas.show-gimnasta', compact('gimnasta', 'paises', 'imagen'));
@@ -115,7 +117,9 @@ class GimnastaController extends Controller
      */
     public function galeria(Gimnasta $gimnasta)
     {
-        $pics = Picture::where('gimnastas_id', '=', $gimnasta->id)->get();
+        $pics = Picture::where('gimnastas_id', '=', $gimnasta->id)
+        ->where('approved', true) //solo imagenes aprobadas
+        ->get();
         return view('gimnastas.galeriaGimnasta', compact('gimnasta', 'pics'));
     }
 

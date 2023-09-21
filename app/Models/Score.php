@@ -46,6 +46,6 @@ class Score extends Model
     }
 
     public function changeScores(){
-        return $this->hasMany(changeScore::class)
+        return $this->hasMany(changeScore::class);
     }
 }

@@ -43,6 +43,16 @@ class ScorePolicy
     }
 
     /**
+     * Determine whether the user can update the model.
+     */
+    public function approve(User $user, Score $score): response
+    {
+        return $user->is_admin==true
+            ? Response::allow()
+            : Response::denyAsNotFound();
+    }
+
+    /**
      * Determine whether the user can delete the model.
      */
     public function delete(User $user, Score $score): response

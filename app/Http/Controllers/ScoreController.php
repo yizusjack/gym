@@ -108,7 +108,7 @@ class ScoreController extends Controller
         $this->authorize('delete', $score);
         $event=$score->events_id;
         $score->delete();
-        return redirect()->route('event.controlI');
+        return redirect()->route('event.show', $event);
     }
 
     /**
@@ -163,6 +163,7 @@ class ScoreController extends Controller
 
     public function aproveI(Score $score) //aprobar
     {
+        $this->authorize('approve', $score);
         if($score->approved==0){
             Score::where('id', $score->id)->update(['approved' => true]);
         }
@@ -172,6 +173,7 @@ class ScoreController extends Controller
 
     public function denyI(Score $score) //aprobar
     {
+        $this->authorize('approve', $score);
         $ret = $score->events_id;
         if($score->approved==0){
             $score->forceDelete();

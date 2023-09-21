@@ -59,6 +59,16 @@ Route::get('gimnasta/galeria/{gimnasta}',
 //PICTURES
 Route::resource('picture', PictureController::class)->middleware('auth');
 
+Route::get('controlP',
+    [PictureController::class, 'controlP'])
+    ->name('picture.controlP')
+    ->middleware('auth');
+
+Route::patch('picture/{picture}/aproveP',
+    [PictureController::class, 'aproveP'])
+    ->name('picture.aproveP')
+    ->middleware('auth');
+
 // EVENTS
 
 Route::resource('event', EventController::class)->middleware('auth');
