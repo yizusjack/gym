@@ -26,6 +26,16 @@
       <br>
       <a href="{{route('score.pdf', $event)}}" target="_blank"><button type="button" class="btn btn-success"><i class="bx bxs-file-pdf"></i></button></a>
     </div>
+
+    @if (Auth::user()->is_admin==true)
+      <div class="col-md-3">
+        <br>
+        <a href="{{route('event.controlI', $event)}}"><button type="button" class="btn btn-success">Aprobar cambios</i></button></a>
+      </div>
+    @endif
+
+      
+
   </div>
   <table class="table table-striped">
     <thead>

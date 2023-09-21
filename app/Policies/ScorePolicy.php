@@ -11,9 +11,11 @@ class ScorePolicy
     /**
      * Determine whether the user can view any models.
      */
-    public function viewAny(User $user): bool
+    public function viewAny(User $user): response
     {
-        //
+        return $user->is_admin==true
+        ? Response::allow()
+        : Response::denyAsNotFound();
     }
 
     /**
@@ -43,7 +45,7 @@ class ScorePolicy
     }
 
     /**
-     * Determine whether the user can update the model.
+     * Determine whether the user can approve the changes.
      */
     public function approve(User $user, Score $score): response
     {

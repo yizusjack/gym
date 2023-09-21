@@ -14,6 +14,9 @@ class PictureController extends Controller
      */
     public function index()
     {
+        if (Auth::user()->cannot('viewAny', Picture::class)) {
+            abort(404);
+        }
         $pictures = Picture::all();
 
         return view('pictures.indexPicture', compact('pictures'));
@@ -84,6 +87,9 @@ class PictureController extends Controller
 
     public function controlP()
     {
+        if (Auth::user()->cannot('viewAny', Picture::class)) {
+            abort(404);
+        }
         $pictures = Picture::where('approved', false)->get();
 
         return view('pictures.controlPicture', compact('pictures'));
@@ -91,11 +97,21 @@ class PictureController extends Controller
 
     public function aproveP(Picture $picture) //aprobar
     {
-        //$this->authorize('approve', $score);
+        $this->authorize('approve', $picture);
         if($picture->approved==0){
             Picture::where('id', $picture->id)->update(['approved' => true]);
         }
 
+        return redirect()->route('picture.controlP');
+    }
+
+    public function denyP(Picture $picture) //denegar
+    {
+        $this->authorize('approve', $picture);
+        if($picture->approved==0){
+            Storage::delete($picture->hash);
+            $picture->delete();
+        }
         return redirect()->route('picture.controlP');
     }
 }

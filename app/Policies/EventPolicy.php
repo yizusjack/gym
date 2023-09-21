@@ -67,4 +67,9 @@ class EventPolicy
     {
         //
     }
+
+    public function control(User $user, Event $event): bool
+    {
+        return $user->is_admin==true;
+    }
 }

@@ -107,6 +107,9 @@ class EventController extends Controller
 
     public function controlI(Event $event)
     {
+        if (Auth::user()->cannot('control', $event)) {
+            abort(404);
+        }
         $scores= Score::with(['gimnastas', 'events', 'rounds', 'aparatos'])
         ->where('events_id', $event->id)
         ->where('approved', 0) //solo regresa los registros no aprobados

@@ -97,12 +97,14 @@
            </ul>
       </li><!-- End Components Nav -->
 
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="{{route('gimnasta.create')}}">
-          <i class="bi bi-person-plus-fill"></i>
-          <span>Agregar gimnasta</span>
-        </a>
-      </li>
+      @if (Auth::user()->is_admin==true)  {{--Solo los admins tienen acceso--}}
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="{{route('gimnasta.create')}}">
+            <i class="bi bi-person-plus-fill"></i>
+            <span>Agregar gimnasta</span>
+          </a>
+        </li>
+      @endif
       
       <li class="nav-item">
         <a class="nav-link collapsed" href="{{route('competencia.index')}}">
@@ -125,12 +127,14 @@
         </a>
       </li>
 
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="{{route('picture.index')}}">
-          <i class="ri-image-edit-fill"></i>
-          <span>Gestionar imágenes</span>
-        </a>
-      </li>
+      @if (Auth::user()->is_admin==true)  {{--Solo los admins tienen acceso--}}
+        <li class="nav-item"> 
+          <a class="nav-link collapsed" href="{{route('picture.index')}}">
+            <i class="ri-image-edit-fill"></i>
+            <span>Gestionar imágenes</span>
+          </a>
+        </li>
+      @endif
 
 
       <li class="nav-heading">Redes</li>

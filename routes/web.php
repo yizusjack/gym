@@ -69,6 +69,11 @@ Route::patch('picture/{picture}/aproveP',
     ->name('picture.aproveP')
     ->middleware('auth');
 
+Route::delete('picture/{picture}/denyP',
+    [PictureController::class, 'denyP'])
+    ->name('picture.denyP')
+    ->middleware('auth');
+
 // EVENTS
 
 Route::resource('event', EventController::class)->middleware('auth');

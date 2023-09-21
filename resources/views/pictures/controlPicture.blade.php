@@ -33,7 +33,15 @@
                             </div>
                         </form>
                     </td>
-                    <td>No</td>
+                    <td>
+                        <form action="{{route('picture.denyP', $pic)}}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <div class='text-center'>
+                                <button class='btn btn-danger'>✘</button>
+                            </div>
+                        </form>
+                    </td>
                 </tr>
             @endforeach
         </tbody>
