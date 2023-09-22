@@ -27,7 +27,8 @@ class Score extends Model
     'deductions_s',
     'total_s',
     'user_id',
-    'approved'];
+    'approved',
+    'edited'];
 
     public function gimnastas(){
         return $this->belongsTo(Gimnasta::class);

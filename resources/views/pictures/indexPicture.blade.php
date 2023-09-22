@@ -4,6 +4,12 @@
     </x-slot>
     <h1>Imagenes</h1>
 
+    @if (Auth::user()->is_admin==true)
+      <div class="col-md-3">
+        <br>
+        <a href="{{route('picture.controlP')}}"><button type="button" class="btn btn-success">Aprobar cambios</i></button></a>
+      </div>
+    @endif
     <table class="table table-striped">
         <thead>
           <tr>

@@ -92,8 +92,15 @@ class ScoreController extends Controller
         ]);
         $request['user_id'] = Auth::user()->id;
         $request['total_s'] = $request->difficulty_s + $request->execution_s - $request->deductions_s;
+        $request['edited'] = Auth::user()->is_admin == true ? false : true;
 
-        Score::where('id', $score->id)->update($request->except('_token', '_method'));
+        //dd($request);
+        if(Auth::user()->is_admin == true){
+            Score::where('id', $score->id)->update($request->except('_token', '_method'));
+        }
+        else{
+            Score::create($request->all());
+        }
 
         return redirect()->route('event.show', $request->events_id)->with('score', 'editada');
     }
@@ -164,7 +171,7 @@ class ScoreController extends Controller
     public function aproveI(Score $score) //aprobar
     {
         $this->authorize('approve', $score);
-        if($score->approved==0){
+        if($score->approved==0 && $score->edited != true){
             Score::where('id', $score->id)->update(['approved' => true]);
         }
 

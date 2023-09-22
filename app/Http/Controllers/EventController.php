@@ -113,6 +113,7 @@ class EventController extends Controller
         $scores= Score::with(['gimnastas', 'events', 'rounds', 'aparatos'])
         ->where('events_id', $event->id)
         ->where('approved', 0) //solo regresa los registros no aprobados
+        ->where('edited', 0)
         ->orderBy('total_s', 'desc')
         ->orderBy('execution_s', 'desc')
         ->orderBy('difficulty_s', 'desc')

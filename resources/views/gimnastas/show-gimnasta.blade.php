@@ -100,14 +100,16 @@
                         @endswitch
                         de {{$fechaN->format('Y')}} ({{$Diferencia -> format('%Y')}} años).
                     </p>
-                    <form action="{{route('gimnasta.destroy', $gimnasta)}}" method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <div class='text-center'>
-                            <a href="{{route('gimnasta.edit', $gimnasta)}}"><button type="button" class="btn btn-primary">Editar</button></a>
-                            <button type="submit" class="btn btn-danger">Eliminar</button>
-                        </div>
-                    </form>
+                    @if(Auth::user()->is_admin == true)
+                        <form action="{{route('gimnasta.destroy', $gimnasta)}}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <div class='text-center'>
+                                <a href="{{route('gimnasta.edit', $gimnasta)}}"><button type="button" class="btn btn-primary">Editar</button></a>
+                                <button type="submit" class="btn btn-danger">Eliminar</button>
+                            </div>
+                        </form>
+                    @endif
                     @if ($gimnasta->paises->nombre_p=="Italia")
                         <br>
                         <div class="text-center">
@@ -116,22 +118,24 @@
                     @endif
                 </div>
             </div>
-            <div class="card">
-                <div class="card-body">
-                    <form action="{{route('picture.store')}}" method="POST" enctype="multipart/form-data">
-                        @csrf
-                        <div class="mb-3">
-                            <label for="picture" class="form-label">Agregar imágenes</label>
-                            <input class="form-control" type="file" id="picture" name="picture">
-                          </div>
-                      
-                        <input type="hidden" name="gimnastas_id" id="gimnastas_id" value="{{$gimnasta->id}}">
-                        <div class="col-md-4">
-                            <button type="submit" class="btn btn-outline-secondary">Subir</button>
-                        </div>
-                    </form>
+            @if(Auth::user()->is_admin == true)
+                <div class="card">
+                    <div class="card-body">
+                        <form action="{{route('picture.store')}}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <div class="mb-3">
+                                <label for="picture" class="form-label">Agregar imágenes</label>
+                                <input class="form-control" type="file" id="picture" name="picture">
+                            </div>
+                        
+                            <input type="hidden" name="gimnastas_id" id="gimnastas_id" value="{{$gimnasta->id}}">
+                            <div class="col-md-4">
+                                <button type="submit" class="btn btn-outline-secondary">Subir</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-            </div>
+            @endif
         </div>
     </div>
     @section('js')
