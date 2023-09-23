@@ -12,6 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('change_scores', function (Blueprint $table) {
+            $table->id();
             $table->unsignedBigInteger('old_id');
             $table->unsignedBigInteger('new_id');
 

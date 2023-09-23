@@ -11,7 +11,16 @@ class changeScore extends Model
     
     public $timestamps = false;
 
+    protected $fillable = [
+        'old_id',
+        'new_id',
+    ];
+
     public function scores(){
-        return $this->belongsTo(Score::class);
+        return $this->belongsTo(Score::class, 'old_id');
+    }
+
+    public function scoresN(){
+        return $this->belongsTo(Score::class, 'new_id');
     }
 }

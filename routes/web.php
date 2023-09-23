@@ -9,6 +9,7 @@ use App\Http\Controllers\ScoreController;
 use App\Http\Controllers\EquipoController;
 use App\Http\Controllers\PictureController;
 use App\Http\Controllers\GimnastaController;
+use App\Http\Controllers\ChangeScoreController;
 use App\Http\Controllers\CompetenciaController;
 
 /*
@@ -154,3 +155,20 @@ View::composer(['*'], function($view){ //envia informacion a todas las vistas
     $gimn = Gimnasta::all();
     $view->with('gimn', $gimn);
 });
+
+//CHANGESCORES
+
+Route::get('changescore',
+    [ChangeScoreController::class, 'index'])
+    ->name('changescore.index')
+    ->middleware('auth');
+
+Route::patch('changescore/{changeScore}/aproveE',
+    [ChangeScoreController::class, 'aproveE'])
+    ->name('changescore.aproveE')
+    ->middleware('auth');
+
+Route::delete('changescore/{changeScore}/denyE',
+    [ChangeScoreController::class, 'denyE'])
+    ->name('changescore.denyE')
+    ->middleware('auth');

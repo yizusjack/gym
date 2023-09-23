@@ -7,9 +7,10 @@ use App\Models\Round;
 use App\Models\Score;
 use App\Models\Aparato;
 use App\Models\Gimnasta;
+use App\Models\changeScore;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Auth;
 
 class ScoreController extends Controller
 {
@@ -99,7 +100,11 @@ class ScoreController extends Controller
             Score::where('id', $score->id)->update($request->except('_token', '_method'));
         }
         else{
-            Score::create($request->all());
+            $nScore=Score::create($request->all());
+            $change = changeScore::create([
+                'old_id' => $score->id,
+                'new_id' => $nScore->id,
+            ]);
         }
 
         return redirect()->route('event.show', $request->events_id)->with('score', 'editada');
