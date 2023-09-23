@@ -59,7 +59,7 @@ class ScorePolicy
      */
     public function delete(User $user, Score $score): response
     {
-        return $user->id === $score->user_id
+        return $user->is_admin == true
             ? Response::allow()
             : Response::denyAsNotFound();
     }

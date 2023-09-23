@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Score;
 use App\Models\changeScore;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ChangeScoreController extends Controller
 {
@@ -13,11 +14,15 @@ class ChangeScoreController extends Controller
      */
     public function index()
     {
+        if (Auth::user()->cannot('viewAny', changeScore::class)) {
+            abort(404);
+        }
         return view('scores.controlEditScores');
     }
 
     public function aproveE(changeScore $changeScore)
     {
+        $this->authorize('approve', $changeScore);
         $original = Score::where('id', $changeScore->old_id)->first();  //obtiene el registro original
         $new = Score::where('id', $changeScore->new_id); //obtiene el registro nuevo
         $originalId = $original->id; //guarda el id del registro original

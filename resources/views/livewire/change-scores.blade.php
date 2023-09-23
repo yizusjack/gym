@@ -49,7 +49,7 @@
             </table>
         </div>
         <div class='row text-center'>
-            <div class="col-12">
+            <div class="col-6">
                 <form action="{{route('changescore.aproveE', $score)}}" method="POST">
                     @csrf
                     @method('PATCH')
@@ -57,6 +57,8 @@
                         <button class='btn btn-success'>✔</button>
                     </div>
                 </form>
+            </div>
+            <div class="col-6">
                 <form action="{{route('changescore.denyE', $score)}}" method="POST">
                     @csrf
                     @method('DELETE')

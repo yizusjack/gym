@@ -28,9 +28,13 @@
     </div>
 
     @if (Auth::user()->is_admin==true)
-      <div class="col-md-3">
+      <div class="col-md-2">
         <br>
         <a href="{{route('event.controlI', $event)}}"><button type="button" class="btn btn-success">Aprobar cambios</i></button></a>
+      </div>
+      <div class="col-md-2">
+        <br>
+        <a href="{{route('event.controlI', $event)}}"><button type="button" class="btn btn-success">Aprobar ediciones</i></button></a>
       </div>
     @endif
 
@@ -62,12 +66,10 @@
                 <td>{{$score->deductions_s}}</td>
                 <td>{{$score->total_s}}</td>
                 <td>
-                  @can('editScore', $score)
                     <a href="{{route('score.edit', $score->id)}}"><button type="button" class="btn btn-primary"><i class="bi bi-pencil-square"></i></button></a>
-                  @endcan
                 </td>
                 <td>
-                  @can('editScore', $score)
+                  @if(Auth::user()->is_admin == true)
                     <form action="{{route('score.destroy', $score)}}" method="POST">
                       @csrf
                       @method('DELETE')
@@ -75,7 +77,7 @@
                           <button type="submit" class="btn btn-danger"><i class="bi bi-trash-fill"></i></button>
                       </div>
                   </form>
-                @endcan
+                  @endif
                 </td>
             </tr>
         @endforeach

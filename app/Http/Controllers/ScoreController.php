@@ -68,7 +68,7 @@ class ScoreController extends Controller
      */
     public function edit(Score $score)
     {
-        $this->authorize('update', $score);
+        //$this->authorize('update', $score);
         $gimnastas = Gimnasta::all();
         $rounds = Round::all();
         $aparatos = Aparato::all();
@@ -81,7 +81,7 @@ class ScoreController extends Controller
      */
     public function update(Request $request, Score $score)
     {
-        $this->authorize('update', $score);
+        //$this->authorize('update', $score);
         $request->validate([
             'gimnastas_id'=>['required', 'exists:gimnastas,id'], 
             'events_id'=>['required', 'exists:events,id'],
