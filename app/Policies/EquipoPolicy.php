@@ -2,11 +2,11 @@
 
 namespace App\Policies;
 
-use App\Models\Event;
+use App\Models\Equipo;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
 
-class EventPolicy
+class EquipoPolicy
 {
     /**
      * Determine whether the user can view any models.
@@ -19,7 +19,7 @@ class EventPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Event $event): bool
+    public function view(User $user, Equipo $equipo): bool
     {
         //
     }
@@ -27,27 +27,23 @@ class EventPolicy
     /**
      * Determine whether the user can create models.
      */
-    public function create(User $user): response
+    public function create(User $user): bool
     {
-        return $user->is_admin == true
-        ? Response::allow()
-        : Response::denyAsNotFound();
+        //
     }
 
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Event $event): response
+    public function update(User $user, Equipo $equipo): bool
     {
-        return $user->is_admin == true
-        ? Response::allow()
-        : Response::denyAsNotFound();
+        //
     }
 
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Event $event): response
+    public function delete(User $user, Equipo $equipo): response
     {
         return $user->is_admin == true
         ? Response::allow()
@@ -57,7 +53,7 @@ class EventPolicy
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, Event $event): bool
+    public function restore(User $user, Equipo $equipo): bool
     {
         //
     }
@@ -65,13 +61,8 @@ class EventPolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, Event $event): bool
+    public function forceDelete(User $user, Equipo $equipo): bool
     {
         //
-    }
-
-    public function control(User $user, Event $event): bool
-    {
-        return $user->is_admin==true;
     }
 }

@@ -34,7 +34,7 @@
       </div>
       <div class="col-md-2">
         <br>
-        <a href="{{route('event.controlI', $event)}}"><button type="button" class="btn btn-success">Aprobar ediciones</i></button></a>
+        <a href="{{route('changescore.index', $event)}}"><button type="button" class="btn btn-success">Aprobar ediciones</i></button></a>
       </div>
     @endif
 

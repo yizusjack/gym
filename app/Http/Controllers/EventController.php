@@ -33,7 +33,8 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
-         $request->validate([
+        $this->authorize('create', Event::class); 
+        $request->validate([
              'nombre_e' => ['required', 'max:255'],
             'fecha_i_e'=> ['required', 'date'],
             'fecha_f_e'=> ['required', 'date'],
@@ -101,6 +102,7 @@ class EventController extends Controller
 
     public function newEvent(Competencia $competencia)
     {
+        $this->authorize('create', Event::class);
         $paises = Pais::orderBy('nombre_p')->get();
         return view('events.createEvent', compact('paises', 'competencia'));
     }

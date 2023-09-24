@@ -55,12 +55,14 @@
                     </td>  
                 </tr>
             @endforeach
-            <tr>
-                <td><a href="{{route('gimnasta.create')}}">
-                    <i class="bi bi-person-plus-fill"></i>
-                    <span>Agregar gimnasta</span>
-                </a></td>
-            </tr>
+            @if(Auth::user()->is_admin == true)
+              <tr>
+                  <td><a href="{{route('gimnasta.create')}}">
+                      <i class="bi bi-person-plus-fill"></i>
+                      <span>Agregar gimnasta</span>
+                  </a></td>
+              </tr>
+            @endif
         </tbody>
       </table>
       

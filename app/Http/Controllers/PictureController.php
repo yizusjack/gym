@@ -35,6 +35,9 @@ class PictureController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'picture' => ['image'],
+        ]);
         if($request->hasFile('picture') && $request->file('picture')->isValid()){
             $route = $request->picture->store('public');
             $ret = $request->gimnastas_id;

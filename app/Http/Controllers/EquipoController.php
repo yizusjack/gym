@@ -68,12 +68,14 @@ class EquipoController extends Controller
      */
     public function destroy(Equipo $equipo)
     {
+        $this->authorize('delete', $equipo);
         $equipo->delete();
         return redirect()->route('equipo.index');
     }
 
     public function adminEquipos(Request $request, Equipo $equipo)
     {
+        $this->authorize('delete', $equipo);
         $request->validate([
             'gimnasta_id' => ['required'],
             'alternate_g' => ['required'],

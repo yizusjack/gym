@@ -24,6 +24,7 @@ class CompetenciaController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', Competencia::class);
         return view('competencias.createCompetencia');
     }
 
@@ -32,6 +33,7 @@ class CompetenciaController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('create', Competencia::class);
         $request->validate([
             'nombre_c' => ['required', 'max:255'],
             'tipo_c' => ['required', 'min:1', 'max:3'],
@@ -54,6 +56,7 @@ class CompetenciaController extends Controller
      */
     public function edit(Competencia $competencia)
     {
+        $this->authorize('update', $competencia);
         return view('competencias.editCompetencia', compact('competencia'));
     }
 
@@ -62,6 +65,7 @@ class CompetenciaController extends Controller
      */
     public function update(Request $request, Competencia $competencia)
     {
+        $this->authorize('update', $competencia);
         $request->validate([
             'nombre_c' => ['required', 'max:255'],
             'tipo_c' => ['required', 'min:1', 'max:3'],
@@ -77,6 +81,7 @@ class CompetenciaController extends Controller
      */
     public function destroy(Competencia $competencia)
     {
+        $this->authorize('delete', $competencia);
         $competencia->delete();
         return redirect()->route('competencia.index');
     }

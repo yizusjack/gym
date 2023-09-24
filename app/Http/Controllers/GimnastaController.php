@@ -29,6 +29,7 @@ class GimnastaController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', Gimnasta::class);
         $paises = Pais::orderBy('nombre_p')->get();
         return view('gimnastas.createGimnasta', compact('paises'));
     }
@@ -38,6 +39,7 @@ class GimnastaController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('create', Gimnasta::class);
         $request->validate([
             'nombre_g' => ['required', 'max:255'],
             'apellido_g' => ['required', 'max:255'],
@@ -72,6 +74,7 @@ class GimnastaController extends Controller
      */
     public function edit(Gimnasta $gimnasta)
     {
+        $this->authorize('create', $gimnasta);
         $paises = Pais::orderBy('nombre_p')->get();
         return view('gimnastas.edit-gimnasta', compact('gimnasta', 'paises'));
     }
@@ -81,6 +84,7 @@ class GimnastaController extends Controller
      */
     public function update(Request $request, Gimnasta $gimnasta)
     {
+        $this->authorize('create', $gimnasta);
         $request->validate([
             'nombre_g' => ['required', 'max:255'],
             'apellido_g' => ['required', 'max:255'],
@@ -101,6 +105,7 @@ class GimnastaController extends Controller
      */
     public function destroy(Gimnasta $gimnasta)
     {
+        $this->authorize('delete', $gimnasta);
         $pics = Picture::where('gimnastas_id', '=', $gimnasta->id)->get();
         foreach($pics as $pic){
             Storage::delete($pic->hash); //elimina todas las imagenes relacionadas a la gimnasta a eliminar

@@ -118,7 +118,6 @@
                     @endif
                 </div>
             </div>
-            @if(Auth::user()->is_admin == true)
                 <div class="card">
                     <div class="card-body">
                         <form action="{{route('picture.store')}}" method="POST" enctype="multipart/form-data">
@@ -132,10 +131,12 @@
                             <div class="col-md-4">
                                 <button type="submit" class="btn btn-outline-secondary">Subir</button>
                             </div>
+                            @error('picture')
+                                <h5>{{$message}}</h5>
+                            @enderror
                         </form>
                     </div>
                 </div>
-            @endif
         </div>
     </div>
     @section('js')

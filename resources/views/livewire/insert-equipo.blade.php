@@ -1,5 +1,8 @@
 <div>
-    <button wire:click="$set('display', true)" type="button" class="btn btn-primary">Añadir</button>
+    @if(Auth::user()->is_admin==true)
+      <button wire:click="$set('display', true)" type="button" class="btn btn-primary">Añadir</button>
+    @endif
+    
 
     <x-dialog-modal wire:model='display'>
         <x-slot name='title'> Nuevo equipo</x-slot>
@@ -32,7 +35,7 @@
                     @error('events_id') <span class="error">{{ $message }}</span> @enderror
                 </div>
                 
-                <div class="row text-center">
+                <div class="col-12 text-center">
                   <button wire.click="save" type="submit" class="btn btn-primary">Enviar</button>
                   <button type="button" class="btn btn-secondary">Limpiar</button>
                 </div>
