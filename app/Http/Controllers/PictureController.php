@@ -17,7 +17,8 @@ class PictureController extends Controller
         if (Auth::user()->cannot('viewAny', Picture::class)) {
             abort(404);
         }
-        $pictures = Picture::all();
+        $pictures = Picture::where('approved', true)
+        ->get();
 
         return view('pictures.indexPicture', compact('pictures'));
     }

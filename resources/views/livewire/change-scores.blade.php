@@ -13,7 +13,7 @@
                         <tr>
                             <td scope="row">Gimnasta</td>
                             <td>{{$score->scores->gimnastas->nombre_g}} {{$score->scores->gimnastas->apellido_g}}</td>
-                            <td>{{$score->scoresN->gimnastas->nombre_g}} {{$score->scores->gimnastas->apellido_g}}</td>
+                            <td>{{$score->scoresN->gimnastas->nombre_g}} {{$score->scoresN->gimnastas->apellido_g}}</td>
                         </tr>
                         <tr>
                             <td scope="row">Ronda</td>

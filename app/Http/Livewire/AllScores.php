@@ -26,6 +26,8 @@ class AllScores extends Component
         ->when($this->eventsFilter, function($query){
             $query->where('events_id', $this->eventsFilter);
         })
+        ->where('approved', true)
+        ->where('edited', false)
         ->with(['gimnastas', 'events', 'rounds', 'aparatos'])
         ->orderBy('events_id')
         ->orderBy('total_s', 'desc')
