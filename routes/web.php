@@ -11,6 +11,9 @@ use App\Http\Controllers\PictureController;
 use App\Http\Controllers\GimnastaController;
 use App\Http\Controllers\ChangeScoreController;
 use App\Http\Controllers\CompetenciaController;
+use App\Http\Controllers\NewsController;
+use App\Http\Controllers\CommentController;
+use App\Http\Controllers\ForumController;
 
 /*
 |--------------------------------------------------------------------------
@@ -172,3 +175,8 @@ Route::delete('changescore/{changeScore}/denyE',
     [ChangeScoreController::class, 'denyE'])
     ->name('changescore.denyE')
     ->middleware('auth');
+
+//NEWS
+Route::resource('news', NewsController::class)->middleware('auth');
+
+Route::resource('forum', ForumController::class)->middleware('auth');
