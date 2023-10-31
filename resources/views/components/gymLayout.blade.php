@@ -81,6 +81,12 @@
   <aside id="sidebar" class="sidebar">
 
     <ul class="sidebar-nav" id="sidebar-nav">
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{{route('news.index')}}">
+          <i class="bi bi-layout-text-window-reverse"></i>
+          <span>Noticias</span>
+        </a>
+      </li>
 
       <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
@@ -124,6 +130,13 @@
         <a class="nav-link collapsed" href="{{route('score.index')}}">
           <i class="bx bx-list-check"></i>
           <span>Puntuaciones</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{{route('forum.index')}}">
+          <i class="bi bi-layout-text-window-reverse"></i>
+          <span>Foros</span>
         </a>
       </li>
 
@@ -219,6 +232,7 @@
 
   @stack('modals')
 
+  <script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.min.js" defer></script>
   @livewireScripts
 
 </body>
