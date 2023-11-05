@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\News;
 use App\Models\User;
+use App\Models\Comment;
 use Illuminate\Http\Request;
 use Auth;
 use Illuminate\Support\Facades\Storage;
@@ -115,7 +116,13 @@ class NewsController extends Controller
             Storage::delete($news->image);
         }
 
-        $news->comments()->delete();
+        $type = 'News';
+        $comments = Comment::where('commentable_type', $type)
+            ->where('commentable_id', $news->id)
+            ->get();
+        foreach($comments as $comment){
+            $comment->delete();
+        };
         $news->delete();
 
         return redirect()->route('news.index')->with('news', 'eliminada');

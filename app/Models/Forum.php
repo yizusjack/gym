@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Comment;
 use App\Models\User;
+use App\Models\Tag;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -28,13 +29,8 @@ class Forum extends Model
         return $this->morphMany(Comment::class, 'commentable');
     }
 
-    protected static function boot()
+    public function tags()
     {
-        parent::boot();
-
-        static::deleting(function ($forum) {
-            // Delete all associated comments
-            $forum->comments()->delete();
-        });
+        return $this->belongsToMany(Tag::class);
     }
 }

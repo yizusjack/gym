@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Forum;
+use App\Models\Tag;
+use App\Models\Comment;
 use Illuminate\Http\Request;
 use Auth;
 
@@ -22,7 +24,8 @@ class ForumController extends Controller
      */
     public function create()
     {
-        return view('forums.createForum');
+        $tags = Tag::all();
+        return view('forums.createForum', compact('tags'));
     }
 
     /**
@@ -31,17 +34,32 @@ class ForumController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title' => ['required',  'max:255'],
+            'title' => ['required', 'max:255'],
             'content' => ['required'],
         ]);
 
-        $forum = new forum();
+        $forum = new Forum();
         $forum->title = $request->input('title');
         $forum->content = nl2br($request->input('content'));
         $forum->user_id = Auth::id();
         $forum->created_at = now();
         $forum->save();
-        
+
+        $selectedTags = $request->input('selectedTags', []);
+        $forum->tags()->sync($selectedTags);
+
+        // Create and attach new tags
+        $newTags = $request->input('newTags');
+        if (!empty($newTags)) {
+            $newTagNames = explode(',', $newTags);
+            foreach ($newTagNames as $tagName) {
+                $tag = Tag::firstOrNew(['tag_name' => trim($tagName)]);
+                $tag->save();
+                $selectedTags[] = $tag->id;
+            }
+            $forum->tags()->sync($selectedTags);
+        }
+
         return redirect('forum')->with('forum', 'agregado');
     }
 
@@ -58,7 +76,9 @@ class ForumController extends Controller
      */
     public function edit(Forum $forum)
     {
-        return view('forums.editForum', compact('forum'));
+        $tags = Tag::all();
+        $selectedTags = $forum->tags->pluck('id')->toArray();
+        return view('forums.editForum', compact('forum', 'tags', 'selectedTags'));
     }
 
     /**
@@ -74,7 +94,9 @@ class ForumController extends Controller
     
         $forum->title = $request->input('title');
         $forum->content = $request->input('content');
+        $forum->tags()->sync($request->input('selectedTags', []));
         $forum->save();
+        
         
         return redirect()->route('forum.show', $forum)->with('forum', 'editado');
     }
@@ -84,6 +106,13 @@ class ForumController extends Controller
      */
     public function destroy(Forum $forum)
     {
+        $type = 'Forum';
+        $comments = Comment::where('commentable_type', $type)
+            ->where('commentable_id', $forum->id)
+            ->get();
+        foreach($comments as $comment){
+            $comment->delete();
+        };
         $forum->delete();
 
         return redirect()->route('forum.index')->with('forum', 'eliminado');
