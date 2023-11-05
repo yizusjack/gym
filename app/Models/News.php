@@ -38,14 +38,4 @@ class News extends Model
 
         $this->delete();
     }
-
-    protected static function boot()
-    {
-        parent::boot();
-
-        static::deleting(function ($news) {
-            // Delete all associated comments
-            $news->comments()->delete();
-        });
-    }
 }

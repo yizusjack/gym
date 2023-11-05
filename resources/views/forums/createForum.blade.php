@@ -19,6 +19,20 @@
                 <h5>{{$message}}</h5>
             @enderror
         </div>
+        <div class="col-12">
+          <label for="tags">Elegir Etiquetas:</label><br>
+          @foreach ($tags as $tag)
+            <label>
+              <input type="checkbox" name="selectedTags[]" value="{{ $tag->id }}">
+              {{ $tag->tag_name }}
+            </label>
+          @endforeach
+      </div>
+  
+      <div class="col-12">
+          <label for="newTags">Nueva Etiqueta (Multiples etiquetas separadas por comas):</label>
+          <input type="text" class="form-control" name="newTags" id="newTags" value="{{old('newTags')}}">
+      </div>
         <div class="text-center">
           <button type="submit" class="btn btn-primary">Enviar</button>
           <button type="reset" class="btn btn-secondary">Limpiar</button>

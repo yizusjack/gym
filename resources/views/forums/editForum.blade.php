@@ -22,6 +22,16 @@
             @enderror
 
         </div>
+        <div class="col-12">
+          <label>Etiquetas</label>
+          @foreach ($tags as $tag)
+              <label>
+                  <input type="checkbox" name="selectedTags[]" value="{{ $tag->id }}"
+                         {{ in_array($tag->id, $selectedTags) ? 'checked' : '' }}>
+                  {{ $tag->tag_name }}
+              </label>
+          @endforeach
+      </div>
         <div class="text-center">
           <button type="submit" class="btn btn-primary">Enviar</button>
           <button type="reset" class="btn btn-secondary">Limpiar</button>

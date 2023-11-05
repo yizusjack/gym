@@ -8,6 +8,11 @@
                 <div class="card">
                     <br>
                     <h1> &nbsp;&nbsp;{{ $forum->title }}</h1> 
+                    <ul>
+                        @foreach ($forum->tags as $tag)
+                            <span class="badge bg-primary">{{ $tag->tag_name }}</span>
+                        @endforeach
+                    </ul>
                     <div class="card-body">
                         <table class="table">
                             <tbody>
