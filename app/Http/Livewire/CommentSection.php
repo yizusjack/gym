@@ -73,8 +73,10 @@ class CommentSection extends Component
     public function deleteComment($commentId)
     {
         $comment = Comment::find($commentId);
-        $comment->delete();
 
-        $this->emit('commentDeleted', $commentId);
+        if ($comment) {
+            $comment->delete();
+            $this->emit('commentDeleted', $commentId);
+        }
     }
 }
