@@ -76,6 +76,7 @@ class ForumController extends Controller
      */
     public function edit(Forum $forum)
     {
+        $this->authorize('update', $forum);
         $tags = Tag::all();
         $selectedTags = $forum->tags->pluck('id')->toArray();
         return view('forums.editForum', compact('forum', 'tags', 'selectedTags'));
@@ -86,6 +87,7 @@ class ForumController extends Controller
      */
     public function update(Request $request, Forum $forum)
     {
+        $this->authorize('update', $forum);
         $request->validate([
             'title' => ['required',  'max:255'],
             'content' => ['required'],

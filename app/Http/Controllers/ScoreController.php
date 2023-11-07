@@ -7,10 +7,12 @@ use App\Models\Round;
 use App\Models\Score;
 use App\Models\Aparato;
 use App\Models\Gimnasta;
+use App\Mail\RequestChange;
 use App\Models\changeScore;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class ScoreController extends Controller
 {
@@ -52,6 +54,17 @@ class ScoreController extends Controller
        $request['total_s'] = $request->difficulty_s + $request->execution_s - $request->deductions_s;
        $request['approved'] = Auth::user()->is_admin == true ? true : false; //si es administrador la aprobará, de lo contrario la deniega
        Score::create($request->all());
+
+       if(Auth::user()->is_admin == false){
+            $gym = Gimnasta::where('id', $request->gimnastas_id)->first();
+            $gymnast = $gym->nombre_g . ' ' . $gym->apellido_g;
+            $event = Event::where('id', $request->events_id)->first();
+            $round = Round::where('id', $request->rounds_id)->first();
+            $apparatus = Aparato::where('id', $request->aparatos_id)->first();
+
+            $this->sendMail($gymnast, $event->nombre_e, $apparatus->clave_a, $round->clave_r);
+       }
+
        return redirect()->route('event.show', $request->events_id)->with('score', 'agregada');
     }
 
@@ -105,6 +118,15 @@ class ScoreController extends Controller
                 'old_id' => $score->id,
                 'new_id' => $nScore->id,
             ]);
+
+            $gym = Gimnasta::where('id', $request->gimnastas_id)->first();
+            $gymnast = $gym->nombre_g . ' ' . $gym->apellido_g;
+            $event = Event::where('id', $request->events_id)->first();
+            $round = Round::where('id', $request->rounds_id)->first();
+            $apparatus = Aparato::where('id', $request->aparatos_id)->first();
+
+            $this->sendMail($gymnast, $event->nombre_e, $apparatus->clave_a, $round->clave_r);
+
         }
 
         return redirect()->route('event.show', $request->events_id)->with('score', 'editada');
@@ -201,4 +223,10 @@ class ScoreController extends Controller
 
         return redirect()->route('event.controlI', $ret);
     }
+
+    public function sendMail(string $gymnast, string $event, string $apparatus, string $round){
+        $mailable = new RequestChange($gymnast, $event, $apparatus, $round);
+        Mail::to(Auth::user()->email)->send($mailable);
+     }
+
 }

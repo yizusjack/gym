@@ -29,16 +29,17 @@
                 </div>
             </div>
         </div>
-        @if(Auth::user()->is_admin == true)
+        @if(Auth::user()->id== $forum->user_id or Auth::user()->is_admin == true)
             <div class="card">
                 <br>
-                
                 <div class="card-body">
                         <form action="{{route('forum.destroy', $forum)}}" method="POST">
                             @csrf
                             @method('DELETE')
                             <div class='text-center'>
-                                <a href="{{route('forum.edit', $forum)}}"><button type="button" class="btn btn-primary">Editar</button></a>
+                                @if(Auth::user()->id == $forum->user_id)
+                                    <a href="{{route('forum.edit', $forum)}}"><button type="button" class="btn btn-primary">Editar</button></a>
+                                @endif
                                 <button type="submit" class="btn btn-danger">Eliminar</button>
                             </div>
                         </form>

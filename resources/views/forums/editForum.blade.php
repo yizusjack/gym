@@ -8,7 +8,7 @@
         @method('PATCH')
         <div class="col-12">
           <label for="title" class="form-label">Titulo: </label>
-          <input type="text" class="form-control" name="title" id="title" value={{old('title') ?? $forum->title}} required>
+          <input type="text" class="form-control" name="title" id="title" value="{{old('title') ?? $forum->title}}" required>
             @error('title')
                 <h5>{{$message}}</h5>
             @enderror

@@ -14,7 +14,7 @@
                                 <tr>
                                     <th>{{ $news->author->name }} {{ $news->created_at }}</th>
                                     @if ($news->image)
-                                    <td><img src="{{Storage::url($news->image)}}" class="img-fluid" alt="News Image" style="min-width: 150px; max-width: 400px"> </td>
+                                    <td><img src="{{Storage::url($news->image)}}" class="img-fluid" alt="News Image" style="min-width: 10%; max-width: 50%"> </td>
                                     @endif
                                 </tr>
                             </tbody>
@@ -24,7 +24,7 @@
                 </div>
             </div>
         </div>
-        @if(Auth::user()->is_admin == true)
+        @if(Auth::user()->is_admin == true && $news->admin_id == Auth::user()->id)
             <div class="card">
                 <br>
                 

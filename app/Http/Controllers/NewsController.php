@@ -25,6 +25,7 @@ class NewsController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', News::class);
         return view('news.createNews');
     }
 
@@ -33,6 +34,7 @@ class NewsController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('create', News::class);
         $request->validate([
             'title' => ['required',  'max:255'],
             'content' => ['required'],
@@ -73,6 +75,7 @@ class NewsController extends Controller
      */
     public function edit(News $news)
     {
+        $this->authorize('update', $news);
         return view('news.editNews', compact('news'));
     }
 
@@ -81,6 +84,7 @@ class NewsController extends Controller
      */
     public function update(Request $request, News $news)
     {
+        $this->authorize('update', $news);
         $request->validate([
             'title' => ['required',  'max:255'],
             'content' => ['required'],
@@ -89,7 +93,8 @@ class NewsController extends Controller
 
         if ($request->hasFile('image')) {
             if ($news->image) {
-                Storage::delete($news->image);
+                $path = "public/" . $news->image;
+                Storage::delete($path);
             }
     
             $uploadedImage = $request->file('image');
@@ -112,8 +117,10 @@ class NewsController extends Controller
      */
     public function destroy(News $news)
     {
+        $this->authorize('update', $news);
         if($news->image){
-            Storage::delete($news->image);
+            $path = "public/" . $news->image;
+            Storage::delete($path);
         }
 
         $type = 'News';

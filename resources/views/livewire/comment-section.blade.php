@@ -42,6 +42,11 @@
             <textarea wire:model="content" class="form-control" rows="4" placeholder="Añadir comentario"></textarea>
             @error('content') <span class="text-danger">{{ $message }}</span> @enderror
         </div>
-        <button type="submit" class="btn btn-primary">Enviar</button>
+        <br>
+        <div class="row">
+            <div class="col-12 text-center">
+                <button type="submit" class="btn btn-success">Enviar</button>
+            </div>
+        </div>
     </form>
 </div>

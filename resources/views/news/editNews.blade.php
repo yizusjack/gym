@@ -16,7 +16,7 @@
 
         <div class="col-12">
           <label for="content" class="form-label">Noticia: </label>
-          <textarea class="form-control" name="content" id="content" required>{{ old('content') ?? $news->content}}</textarea>
+          <textarea class="form-control" name="content" id="content" style="height: 356px;" required>{{ old('content') ?? $news->content}}</textarea>
             @error('content')
                 <h5>{{$message}}</h5>
             @enderror

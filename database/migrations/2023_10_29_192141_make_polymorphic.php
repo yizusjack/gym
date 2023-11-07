@@ -25,11 +25,11 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('comments', function (Blueprint $table) {
-            $table->dropColumn('commentable_id');
+           /* $table->dropColumn('commentable_id');
             $table->dropColumn('commentable_type');
             $table->unsignedBigInteger('news_id');
 
-            $table->foreign('news_id')->references('id')->on('news')->ondelete('cascade');
+            $table->foreign('news_id')->references('id')->on('news')->ondelete('cascade');*/
         });
     }
 };
