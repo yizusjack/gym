@@ -1,5 +1,5 @@
 <x-mail::message> 
-    # Solicitud de modicicación de puntuaciones
+    # Solicitud de modificación de puntuaciones
     Usted ha hecho una modificación de puntuaciones el {{$date}} con los siguientes datos:
     Gimnasta: {{$gymnast}}
     Evento: {{$event}}
