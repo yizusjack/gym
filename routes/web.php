@@ -3,17 +3,18 @@
 use App\Models\Pais;
 use App\Models\Gimnasta;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\NewsController;
 use App\Http\Resources\gimnastaResource;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\ForumController;
 use App\Http\Controllers\ScoreController;
 use App\Http\Controllers\EquipoController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PictureController;
 use App\Http\Controllers\GimnastaController;
+use App\Http\Controllers\CalculatorController;
 use App\Http\Controllers\ChangeScoreController;
 use App\Http\Controllers\CompetenciaController;
-use App\Http\Controllers\NewsController;
-use App\Http\Controllers\CommentController;
-use App\Http\Controllers\ForumController;
 
 /*
 |--------------------------------------------------------------------------
@@ -180,3 +181,17 @@ Route::delete('changescore/{changeScore}/denyE',
 Route::resource('news', NewsController::class)->middleware('auth');
 
 Route::resource('forum', ForumController::class)->middleware('auth');
+
+
+//CALCULATOR
+
+Route::get('calculator',
+    [CalculatorController::class, 'index'])
+    ->name('calculator.index')
+    ->middleware('auth');
+
+Route::post('calculator/store',
+    [CalculatorController::class, 'store'])
+    ->name('calculator.store')
+    ->middleware('auth');
+
