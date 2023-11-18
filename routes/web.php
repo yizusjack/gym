@@ -10,6 +10,7 @@ use App\Http\Controllers\ForumController;
 use App\Http\Controllers\ScoreController;
 use App\Http\Controllers\EquipoController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\ElementController;
 use App\Http\Controllers\PictureController;
 use App\Http\Controllers\GimnastaController;
 use App\Http\Controllers\CalculatorController;
@@ -180,6 +181,8 @@ Route::delete('changescore/{changeScore}/denyE',
 //NEWS
 Route::resource('news', NewsController::class)->middleware('auth');
 
+
+//FORUMS
 Route::resource('forum', ForumController::class)->middleware('auth');
 
 
@@ -194,4 +197,7 @@ Route::post('calculator/store',
     [CalculatorController::class, 'store'])
     ->name('calculator.store')
     ->middleware('auth');
+
+//ELEMENTS
+Route::resource('elements', ElementController::class)->middleware('auth');
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Element;
 use Livewire\Component;
 
 class Calculator extends Component
@@ -11,6 +12,10 @@ class Calculator extends Component
     public $index;
     public $element;
     public $ar;
+    //Filters
+    public $nameFilter;
+    public $aliasFilter;
+    public $valueFilter;
     
     public function mount(){
         $this->inputs = array();
@@ -38,7 +43,21 @@ class Calculator extends Component
     
     public function render()
     {
-       // dd($this->inputs);
-        return view('livewire.calculator');
+        //dd(preg_match('/[A-J][DAT]/', 'AS'));
+       
+        $elements = Element::query()
+        ->when($this->nameFilter, function($query){
+            $query->where('name_el', 'like', '%' . $this->nameFilter . '%');
+        })
+        ->when($this->aliasFilter, function($query){
+            $query->where('alias_el', 'like', '%' . $this->aliasFilter . '%');
+        })
+        ->when($this->valueFilter, function($query){
+            $query->where('value_el', $this->valueFilter);
+        })
+        ->orderBy('category_el')
+        ->get();
+
+        return view('livewire.calculator', compact('elements'));
     }
 }
