@@ -29,7 +29,7 @@
     </div>
   </div>
     <br>
-    <form class="row g-3" action="{{route('calculator.store')}}" method="POST">
+    <form class="row g-3" wire:submit.prevent = "calculate" {{--action="{{route('calculator.store')}}"--}} method="POST">
         @csrf
 
         @php
@@ -103,28 +103,9 @@
         <div class="col-1">
           <button wire:click="addRow({{$index}})" class="btn btn-primary" type='button'>New</button>
         </div>
-        {{--@foreach ($inputs as $key => $value)
-        <br>
-          <div class="row mt-2">
-            <div class="col-3">
-                <input wire:model="element.{{$value}}" name="element.{{$value}}" type="text" class="form-control" placeholder="elemento">
-              </div>
-              <div class="col-1">
-                <button wire:click="removeRow({{$key}})" class="btn btn-danger" type='button'>Quitar</button>
-              </div>
-          </div>
-        @endforeach
-
-        
-
-
-       @foreach ($element as $key => $value)
-        <br>
-          <p>Key{{$key}} Value {{$value}}</p>
-        @endforeach--}}
 
         <div class="text-center">
-          <button type="submit" class="btn btn-primary">Enviar</button>
+          <button wire.click="calculate" type="submit" class="btn btn-primary">Enviar</button>
           <button type="reset" class="btn btn-secondary">Limpiar</button>
         </div>
       </form><!-- Vertical Form -->
