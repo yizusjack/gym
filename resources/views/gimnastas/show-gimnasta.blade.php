@@ -47,6 +47,26 @@
                         <th scope="row">Pais</th>
                         <td>{{$gimnasta->paises->nombre_p}} <x-dynamic-component component="flag-country-{{$gimnasta->paises->iso2code_p}}" class="d-inline-block w-6 h-6"/></td>
                     </tr>
+                    @if ($average)
+                        <tr>
+                            <th scope="row">Puntuación promedio:</th>
+                            <td>{{$average}}</td>
+                        </tr>
+                    @endif
+
+                    @if ($maximum)
+                        <tr>
+                            <th scope="row">Puntuación máxima:</th>
+                            <td>{{$maximum->total_s}}-{{$maximum->events->nombre_e}}</td>
+                        </tr>
+                    @endif
+
+                    @if ($minimum)
+                        <tr>
+                            <th scope="row">Puntuación mínima:</th>
+                            <td>{{$minimum->total_s}}-{{$minimum->events->nombre_e}}</td>
+                        </tr>
+                    @endif
                     </tbody>
                 </table>
                 <!-- End Default Table Example -->

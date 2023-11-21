@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pais;
+use App\Models\Score;
 use App\Models\Picture;
 use App\Models\Gimnasta;
 use Illuminate\Http\Request;
@@ -65,8 +66,22 @@ class GimnastaController extends Controller
         ->where('approved', true)
         ->get(); //Searches up for the pictures of the gymnast
         $paises= Pais::find($gimnasta->id);
+        $average = Score::where('gimnastas_id', $gimnasta->id)
+        ->where('approved', true)
+        ->avg('total_s');
+
+        $maximum = Score::where('gimnastas_id', $gimnasta->id)
+        ->with(['events', 'rounds', 'aparatos',])
+        ->orderBy('total_s', 'desc')
+        ->first();
+
+        $minimum = Score::where('gimnastas_id', $gimnasta->id)
+        ->with(['events', 'rounds', 'aparatos',])
+        ->orderBy('total_s', 'asc')
+        ->first();
+        //dd($maximum);
         
-        return view('gimnastas.show-gimnasta', compact('gimnasta', 'paises', 'imagen'));
+        return view('gimnastas.show-gimnasta', compact('gimnasta', 'paises', 'imagen', 'average', 'maximum', 'minimum'));
     }
 
     /**
