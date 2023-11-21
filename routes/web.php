@@ -12,6 +12,7 @@ use App\Http\Controllers\EquipoController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ElementController;
 use App\Http\Controllers\PictureController;
+use App\Http\Controllers\PodcastController;
 use App\Http\Controllers\GimnastaController;
 use App\Http\Controllers\CalculatorController;
 use App\Http\Controllers\ChangeScoreController;
@@ -193,11 +194,13 @@ Route::get('calculator',
     ->name('calculator.index')
     ->middleware('auth');
 
-Route::post('calculator/store',
-    [CalculatorController::class, 'store'])
-    ->name('calculator.store')
+Route::get('calculator/create',
+    [CalculatorController::class, 'create'])
+    ->name('calculator.create')
     ->middleware('auth');
 
 //ELEMENTS
 Route::resource('elements', ElementController::class)->middleware('auth');
 
+//PODCASTS
+Route::resource('podcast', PodcastController::class)->middleware('auth');
