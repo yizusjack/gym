@@ -66,6 +66,8 @@ class GimnastaController extends Controller
         ->where('approved', true)
         ->get(); //Searches up for the pictures of the gymnast
         $paises= Pais::find($gimnasta->id);
+
+        
         $average = Score::where('gimnastas_id', $gimnasta->id)
         ->where('approved', true)
         ->avg('total_s');

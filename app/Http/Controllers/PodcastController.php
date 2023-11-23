@@ -20,6 +20,7 @@ class PodcastController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', Podcast::class);
         return view('podcast.podcastCreate');
     }
 
@@ -28,6 +29,7 @@ class PodcastController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('create', Podcast::class);
         $request->validate([
             'title_p' => ['required', 'max:255'],
             'description_p' => ['required'],
@@ -54,6 +56,7 @@ class PodcastController extends Controller
      */
     public function edit(Podcast $podcast)
     {
+        $this->authorize('update', $podcast);
         return view('podcast.podcastEdit', compact('podcast'));
     }
 
@@ -62,6 +65,7 @@ class PodcastController extends Controller
      */
     public function update(Request $request, Podcast $podcast)
     {
+        $this->authorize('update', $podcast);
         $request->validate([
             'title_p' => ['required', 'max:255'],
             'description_p' => ['required'],
@@ -79,6 +83,7 @@ class PodcastController extends Controller
      */
     public function destroy(Podcast $podcast)
     {
+        $this->authorize('delete', $podcast);
         $podcast->delete();
         return redirect()->route('podcast.index');
     }

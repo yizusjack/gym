@@ -21,6 +21,7 @@ class ElementController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', Element::class);
         return view('elements.elementCreate');
     }
 
@@ -29,6 +30,7 @@ class ElementController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('create', Element::class);
         $request->validate([
             'name_el' => ['required', 'max:255'],
             'alias_el' => ['max:255'],

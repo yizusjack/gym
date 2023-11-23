@@ -141,6 +141,27 @@
         </a>
       </li>
 
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{{route('calculator.index')}}">
+          <i class="bx bxs-calculator"></i>
+          <span>Calculadora</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{{route('podcast.index')}}">
+          <i class="bx bxs-microphone"></i>
+          <span>Podcast</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{{route('score.chart')}}">
+          <i class="bx bx-bar-chart-alt-2"></i>
+          <span>Estadísticas</span>
+        </a>
+      </li>
+
       @if (Auth::user()->is_admin==true)  {{--Solo los admins tienen acceso--}}
         <li class="nav-item"> 
           <a class="nav-link collapsed" href="{{route('picture.index')}}">
