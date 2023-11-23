@@ -141,6 +141,11 @@ Route::delete('score/{score}/denyI',
     ->name('score.denyI')
     ->middleware('auth');
 
+Route::get('charts',
+    [ScoreController::class, 'charts'])
+    ->name('score.chart')
+    ->middleware('auth');
+
 //EQUIPOS
 Route::resource('equipo', EquipoController::class)->middleware('auth');
 

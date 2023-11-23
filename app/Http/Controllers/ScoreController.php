@@ -9,6 +9,7 @@ use App\Models\Aparato;
 use App\Models\Gimnasta;
 use App\Mail\RequestChange;
 use App\Models\changeScore;
+use App\Charts\exampleChart;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Auth;
@@ -228,5 +229,9 @@ class ScoreController extends Controller
         $mailable = new RequestChange($gymnast, $event, $apparatus, $round);
         Mail::to(Auth::user()->email)->send($mailable);
      }
+
+    public function charts(exampleChart $chart){
+        return view('scores.chart', ['chart' => $chart->build()]);
+    }
 
 }
