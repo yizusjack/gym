@@ -20,9 +20,10 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         $this->call([
-            PaisSeeder::class,
+           /* PaisSeeder::class,
             AparatoSeeder::class,
-            RoundSeeder::class,
+            RoundSeeder::class,*/
+            ElementSeeder::class,
         ]);
     }
 }
