@@ -200,9 +200,10 @@ class Calculator extends Component
         if(count($this->acro) + count($this->dance) >= 8 && count($this->acro) >= 3 && count($this->dance) >= 3){
             if($this->acro[count($this->acro) - 1] >= 'D'){
                 $this->dismount += 0.2;
-                rsort($this->acro);
-                rsort($this->dance);
             }
+
+            rsort($this->acro);
+            rsort($this->dance);
 
             for($i = 0; $i<3; $i++){
                 $this->aElements += (ord($this->acro[$i])-64)*0.10;
